@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class SizedBoxHeight extends StatelessWidget {
+class Width extends StatelessWidget {
   double number;
-  SizedBoxHeight(this.number, {super.key});
+  Width(this.number, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / number,
+      height: MediaQuery.of(context).size.width / number,
     );
   }
 }
