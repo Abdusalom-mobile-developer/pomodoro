@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
-import 'package:pomodoro/customs/sizedbox_height.dart';
+import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/main.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 
@@ -12,6 +16,10 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer(
+      const Duration(milliseconds: 2300),
+      () => context.go("/home"),
+    );
     return Scaffold(
       backgroundColor: UtilsColors.bg,
       body: SizedBox(
@@ -25,11 +33,11 @@ class SplashScreen extends StatelessWidget {
               height: CustomSize.height(context, 4),
               fit: BoxFit.fill,
             ),
-            SizedBoxHeight(37),
+            Height(37),
             // Text 1
             CustomText("Master Your Time", UtilsColors.black.withOpacity(0.8),
                 25, FontWeight.bold, TextAlign.center),
-            SizedBoxHeight(280),
+            Height(280),
             // Text 2
             SizedBox(
               width: CustomSize.width(context, 1.3),
@@ -40,7 +48,7 @@ class SplashScreen extends StatelessWidget {
                   FontWeight.w500,
                   TextAlign.center),
             ),
-            SizedBoxHeight(13),
+            Height(13),
           ],
         ),
       ),
