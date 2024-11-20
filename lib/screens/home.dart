@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/customs/width.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    BackButtonInterceptor.remove(myInterceptor);
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    showMyDialog(context);
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -234,4 +258,127 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+// Dialog Shower Method
+void showMyDialog(BuildContext context) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: UtilsColors.bg,
+      content: SizedBox(
+        height: CustomSize.height(context, 7.5),
+        child: Stack(
+          children: [
+            Transform.translate(
+              offset: Offset(0, -CustomSize.height(context, 13)),
+              child: Container(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  padding: EdgeInsets.all(CustomSize.width(context, 20)),
+                  height: CustomSize.height(context, 9),
+                  width: CustomSize.width(context, 2.3),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: UtilsColors.bg,
+                      boxShadow: [
+                        BoxShadow(
+                            color: UtilsColors.black.withOpacity(0.1),
+                            blurRadius: CustomSize.height(context, 20))
+                      ]),
+                  child: Container(
+                      height: CustomSize.height(context, 13),
+                      width: CustomSize.width(context, 4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: UtilsColors.lightPink,
+                      ),
+                      child: Icon(
+                        Icons.error,
+                        color: UtilsColors.pink,
+                        size: CustomSize.width(context, 13),
+                      )),
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CustomText(
+                      "Quit?",
+                      UtilsColors.black,
+                      CustomSize.width(context, 15),
+                      FontWeight.w500,
+                      TextAlign.center,
+                      "PatuaOne"),
+                  CustomText(
+                    "You really want to quit?",
+                    UtilsColors.black.withOpacity(0.7),
+                    CustomSize.width(context, 9),
+                    FontWeight.w500,
+                    TextAlign.center,
+                    "PatuaOne",
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                height: CustomSize.height(context, 17),
+                width: CustomSize.width(context, 3.5),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    border: Border.all(color: UtilsColors.lightGrey, width: 2),
+                    borderRadius:
+                        BorderRadius.circular(CustomSize.width(context, 15)),
+                    color: Colors.transparent),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: CustomText(
+                      "Cancel",
+                      UtilsColors.black,
+                      CustomSize.width(context, 8.3),
+                      FontWeight.w500,
+                      TextAlign.center,
+                      "PatuaOne"),
+                )),
+            SizedBox(
+              width: CustomSize.width(context, 20),
+            ),
+            Container(
+                height: CustomSize.height(context, 17),
+                width: CustomSize.width(context, 3.5),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(CustomSize.width(context, 15)),
+                    color: UtilsColors.pink),
+                child: TextButton(
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                  child: CustomText(
+                      "Quit",
+                      UtilsColors.bg,
+                      CustomSize.width(context, 8.3),
+                      FontWeight.w500,
+                      TextAlign.center,
+                      "PatuaOne"),
+                ))
+          ],
+        )
+      ],
+    ),
+  );
 }
