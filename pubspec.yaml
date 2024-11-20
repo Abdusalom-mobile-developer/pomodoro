@@ -28,8 +28,8 @@ flutter:
   assets:
     - assets/images/
  
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: PatuaOne
+      fonts:
+        - asset: assets/fonts/PatuaOne-Regular.ttf
  
