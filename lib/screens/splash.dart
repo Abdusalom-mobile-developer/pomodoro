@@ -35,7 +35,7 @@ class SplashScreen extends StatelessWidget {
             Height(37),
             // Text 1
             CustomText("Master Your Time", UtilsColors.black.withOpacity(0.8),
-                25, FontWeight.bold, TextAlign.center),
+                25, FontWeight.bold, TextAlign.center, "PatuaOne"),
             Height(280),
             // Text 2
             SizedBox(
@@ -45,7 +45,7 @@ class SplashScreen extends StatelessWidget {
                   UtilsColors.black.withOpacity(0.7),
                   45,
                   FontWeight.w500,
-                  TextAlign.center),
+                  TextAlign.center, "PatuaOne"),
             ),
             Height(13),
           ],
