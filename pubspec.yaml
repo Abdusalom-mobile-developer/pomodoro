@@ -33,4 +33,12 @@ flutter:
     - family: PatuaOne
       fonts:
         - asset: assets/fonts/PatuaOne-Regular.ttf
- 
+    - family: RobotoSlab
+      fonts:
+        - asset: assets/fonts/RobotoSlab-SemiBold.ttf
+    - family: RobotoMono
+      fonts:
+        - asset: assets/fonts/RobotoMono-SemiBold.ttf
+    - family: DMMono
+      fonts:
+        - asset: assets/fonts/DMMono-Regular.ttf

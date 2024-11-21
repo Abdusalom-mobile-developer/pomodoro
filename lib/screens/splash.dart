@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(
       const Duration(milliseconds: 2300),
-      () => context.go("/home"),
+      () => context.go("/instruction"),
     );
     return Scaffold(
       backgroundColor: UtilsColors.bg,
