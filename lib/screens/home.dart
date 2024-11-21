@@ -3,9 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
+import 'package:pomodoro/customs/custom_timer_buttons.dart';
 import 'package:pomodoro/customs/height.dart';
-import 'package:pomodoro/main.dart';
-import 'package:pomodoro/screens/instruction.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -109,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ClipRect(
               child: Container(
                 height: CustomSize.height(context, 6.5),
-                color: UtilsColors.darkPink,
+                color: UtilsColors.pink,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -238,6 +237,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+            Height(20),
+            // Time Choosing Part
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CustomTimerButtons(false, "Pomodoro"),
+                SizedBox(
+                  width: CustomSize.width(context, 50),
+                ),
+                CustomTimerButtons(false, "Short Break"),
+                SizedBox(
+                  width: CustomSize.width(context, 50),
+                ),
+                CustomTimerButtons(true, "Long Break"),
+              ],
+            ),
             // Time Showing Tomato Part
             Container(
               alignment: Alignment.center,
@@ -265,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                               color: UtilsColors.black.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(
-                                  CustomSize.width(context, 25))),
+                                  CustomSize.width(context, 30))),
                           child: CustomText(
                               "25",
                               UtilsColors.bg,
@@ -302,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           decoration: BoxDecoration(
                               color: UtilsColors.black.withOpacity(0.4),
                               borderRadius: BorderRadius.circular(
-                                  CustomSize.width(context, 25))),
+                                  CustomSize.width(context, 30))),
                           child: CustomText(
                               "00",
                               UtilsColors.bg,

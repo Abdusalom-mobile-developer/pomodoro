@@ -94,7 +94,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
             ClipRect(
               child: Container(
                 height: CustomSize.height(context, 6.5),
-                color: UtilsColors.darkPink,
+                color: UtilsColors.pink,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
