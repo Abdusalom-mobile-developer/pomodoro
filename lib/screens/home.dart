@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
-import 'package:pomodoro/customs/width.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -208,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               CustomSize.width(context, 19),
                               FontWeight.w500,
                               TextAlign.center,
-                              "PatuaOne"),
+                              "RobotoMono"),
                         ),
                         // Middle Double Circles
                         Container(
@@ -245,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               CustomSize.width(context, 19),
                               FontWeight.w500,
                               TextAlign.center,
-                              "PatuaOne"),
+                              "RobotoMono"),
                         ),
                       ],
                     ),
