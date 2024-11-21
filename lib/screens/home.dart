@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/main.dart';
+import 'package:pomodoro/screens/instruction.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -32,10 +35,72 @@ class _HomeScreenState extends State<HomeScreen> {
     return true;
   }
 
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UtilsColors.bg,
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: UtilsColors.bg,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          elevation: 5,
+          currentIndex: currentIndex,
+          onTap: (value) {
+            setState(() {
+              currentIndex = value;
+              if (value == 0) {
+                context.go("/home");
+              } else if (value == 3) {
+                context.go("/instruction");
+              }
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                label: "",
+                backgroundColor: Colors.white,
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt1),
+                  height: CustomSize.width(context, 11),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt1Chosen),
+                  height: CustomSize.width(context, 11),
+                )),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt2),
+                  height: CustomSize.width(context, 11),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt2Chosen),
+                  height: CustomSize.width(context, 11),
+                )),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt3),
+                  height: CustomSize.width(context, 12.7),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt3Chosen),
+                  height: CustomSize.width(context, 12.7),
+                )),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt4),
+                  height: CustomSize.width(context, 11),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt4Chosen),
+                  height: CustomSize.width(context, 11),
+                ))
+          ]),
       body: SizedBox(
         width: double.infinity,
         child: Column(
@@ -44,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ClipRect(
               child: Container(
                 height: CustomSize.height(context, 6.5),
-                color: UtilsColors.pink,
+                color: UtilsColors.darkPink,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

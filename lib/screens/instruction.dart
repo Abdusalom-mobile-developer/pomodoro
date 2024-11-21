@@ -1,40 +1,91 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pomodoro/customs/custom_rich_text.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 
-class InstructionScreen extends StatelessWidget {
+class InstructionScreen extends StatefulWidget {
   const InstructionScreen({super.key});
 
+  @override
+  State<InstructionScreen> createState() => _InstructionScreenState();
+}
+
+class _InstructionScreenState extends State<InstructionScreen> {
+  int _currentIndex = 3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UtilsColors.bg,
-      bottomNavigationBar:
-          BottomNavigationBar(backgroundColor: Colors.white, items: [
-        BottomNavigationBarItem(
-            label: "",
-            icon: Image(
-              image: AssetImage(ImgPaths.appBarTomatoBlack),
-              height: CustomSize.width(context, 10),
-            )),
-        BottomNavigationBarItem(
-            label: "",
-            icon: Image(
-              image: AssetImage(ImgPaths.appBarTomatoBlack),
-              height: CustomSize.width(context, 10),
-            )),
-        BottomNavigationBarItem(
-            label: "",
-            icon: Image(
-              image: AssetImage(ImgPaths.appBarTomatoBlack),
-              height: CustomSize.width(context, 10),
-            ))
-      ]),
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: UtilsColors.bg,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          elevation: 5,
+          currentIndex: _currentIndex,
+          onTap: (value) {
+            setState(() {
+              _currentIndex = value;
+              if (value == 0) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              } else if (value == 3) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const InstructionScreen()));
+              }
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                label: "",
+                backgroundColor: Colors.white,
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt1),
+                  height: CustomSize.width(context, 11),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt1Chosen),
+                  height: CustomSize.width(context, 11),
+                )),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt2),
+                  height: CustomSize.width(context, 11),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt2Chosen),
+                  height: CustomSize.width(context, 11),
+                )),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt3),
+                  height: CustomSize.width(context, 12.7),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt3Chosen),
+                  height: CustomSize.width(context, 12.7),
+                )),
+            BottomNavigationBarItem(
+                label: "",
+                icon: Image(
+                  image: AssetImage(ImgPaths.navOpt4),
+                  height: CustomSize.width(context, 11),
+                ),
+                activeIcon: Image(
+                  image: AssetImage(ImgPaths.navOpt4Chosen),
+                  height: CustomSize.width(context, 11),
+                ))
+          ]),
       body: SizedBox(
         width: double.infinity,
         child: Column(
@@ -43,7 +94,7 @@ class InstructionScreen extends StatelessWidget {
             ClipRect(
               child: Container(
                 height: CustomSize.height(context, 6.5),
-                color: UtilsColors.pink,
+                color: UtilsColors.darkPink,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

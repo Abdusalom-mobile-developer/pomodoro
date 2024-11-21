@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Timer(
       const Duration(milliseconds: 2300),
-      () => context.go("/instruction"),
+      () => context.go("/home"),
     );
     return Scaffold(
       backgroundColor: UtilsColors.bg,
@@ -45,7 +45,8 @@ class SplashScreen extends StatelessWidget {
                   UtilsColors.black.withOpacity(0.7),
                   45,
                   FontWeight.w500,
-                  TextAlign.center, "PatuaOne"),
+                  TextAlign.center,
+                  "PatuaOne"),
             ),
             Height(13),
           ],
