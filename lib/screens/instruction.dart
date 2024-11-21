@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pomodoro/customs/custom_rich_text.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
@@ -13,6 +14,27 @@ class InstructionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UtilsColors.bg,
+      bottomNavigationBar:
+          BottomNavigationBar(backgroundColor: Colors.white, items: [
+        BottomNavigationBarItem(
+            label: "",
+            icon: Image(
+              image: AssetImage(ImgPaths.appBarTomatoBlack),
+              height: CustomSize.width(context, 10),
+            )),
+        BottomNavigationBarItem(
+            label: "",
+            icon: Image(
+              image: AssetImage(ImgPaths.appBarTomatoBlack),
+              height: CustomSize.width(context, 10),
+            )),
+        BottomNavigationBarItem(
+            label: "",
+            icon: Image(
+              image: AssetImage(ImgPaths.appBarTomatoBlack),
+              height: CustomSize.width(context, 10),
+            ))
+      ]),
       body: SizedBox(
         width: double.infinity,
         child: Column(
