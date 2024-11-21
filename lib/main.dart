@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/screens/instruction.dart';
 import 'package:pomodoro/screens/splash.dart';
+import 'package:pomodoro/utils/colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme: ThemeData(
+        splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.white,
+        highlightColor: Colors.white,
+      ),
       debugShowCheckedModeBanner: false,
       routerConfig: _router,
     );
