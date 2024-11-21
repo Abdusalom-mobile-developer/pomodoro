@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/screens/instruction.dart';
 import 'package:pomodoro/screens/splash.dart';
-import 'package:pomodoro/utils/colors.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
