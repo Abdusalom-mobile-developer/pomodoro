@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/custom_timer_buttons.dart';
+import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/customs/width.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -332,6 +334,55 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+            // Task Picking Part
+            Container(
+              alignment: Alignment.center,
+              width: CustomSize.width(context, 1.5),
+              height: CustomSize.height(context, 13),
+              decoration: BoxDecoration(
+                  color: UtilsColors.pink.withOpacity(0.1),
+                  borderRadius:
+                      BorderRadius.circular(CustomSize.height(context, 45))),
+              child: TextButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.list_alt_rounded,
+                            color: UtilsColors.pink,
+                            size: CustomSize.height(context, 31),
+                          ),
+                          const SizedBox(
+                            width: 7,
+                          ),
+                          Text(
+                            "Pick a Task",
+                            style: TextStyle(
+                                color: UtilsColors.pink,
+                                fontSize: CustomSize.height(context, 45)),
+                          ),
+                        ],
+                      ),
+                      Icon(
+                        Icons.add,
+                        color: UtilsColors.pink,
+                        size: CustomSize.height(context, 25),
+                      )
+                    ],
+                  )),
+            ),
+            Height(30),
+            // Start Button
+            CustomTimerSQ("Start", () {}),
+            // Height(30),
+            // Quit Button
+            // CustomTimerSQ("Quit", () {}),
           ],
         ),
       ),
@@ -372,6 +423,8 @@ void showMyDialog(BuildContext context) {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: UtilsColors.lightPink,
+                        border:
+                            Border.all(color: UtilsColors.darkPink, width: 2),
                       ),
                       child: Icon(
                         Icons.error,
