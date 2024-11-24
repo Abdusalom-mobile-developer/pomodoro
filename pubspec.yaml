@@ -43,3 +43,6 @@ flutter:
     - family: DMMono
       fonts:
         - asset: assets/fonts/DMMono-Regular.ttf
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter_SemiBold.ttf
