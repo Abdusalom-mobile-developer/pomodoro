@@ -6,7 +6,6 @@ import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/custom_timer_buttons.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
-import 'package:pomodoro/customs/width.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -52,10 +51,10 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: (value) {
             setState(() {
               currentIndex = value;
-              if (value == 0) {
-                context.go("/home");
-              } else if (value == 3) {
+              if (value == 3) {
                 context.go("/instruction");
+              } else if (value == 2) {
+                context.go("/completed_tasks");
               }
             });
           },

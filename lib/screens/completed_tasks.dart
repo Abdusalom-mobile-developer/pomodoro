@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pomodoro/customs/custom_rich_text.dart';
+import 'package:pomodoro/customs/custom_completed_task_maker.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
-import 'package:pomodoro/main.dart';
-import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 
-class InstructionScreen extends StatefulWidget {
-  const InstructionScreen({super.key});
+class CompletedTasksScreen extends StatefulWidget {
+  const CompletedTasksScreen({super.key});
 
   @override
-  State<InstructionScreen> createState() => _InstructionScreenState();
+  State<CompletedTasksScreen> createState() => _CompletedTasksScreenState();
 }
 
-class _InstructionScreenState extends State<InstructionScreen> {
-  int _currentIndex = 3;
+class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,14 +26,14 @@ class _InstructionScreenState extends State<InstructionScreen> {
           showSelectedLabels: false,
           showUnselectedLabels: false,
           elevation: 5,
-          currentIndex: _currentIndex,
+          currentIndex: currentIndex,
           onTap: (value) {
             setState(() {
-              _currentIndex = value;
+              currentIndex = value;
               if (value == 0) {
                 context.go("/home");
-              } else if (value == 2) {
-                context.go("/completed_tasks");
+              } else if (value == 3) {
+                context.go("/instruction");
               }
             });
           },
@@ -86,7 +84,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
         width: double.infinity,
         child: Column(
           children: [
-            // App Bar Simulator
+            // App Bar Part
             ClipRect(
               child: Container(
                 height: CustomSize.height(context, 6.5),
@@ -154,7 +152,7 @@ class _InstructionScreenState extends State<InstructionScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           CustomText(
-                              "Instruction",
+                              "Pomodoro",
                               UtilsColors.bg,
                               CustomSize.width(context, 16.3),
                               FontWeight.w500,
@@ -219,110 +217,66 @@ class _InstructionScreenState extends State<InstructionScreen> {
                 ),
               ),
             ),
-            // Instructions Part
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: CustomSize.width(context, 27),
-                ),
-                // Disabling the Scroll Effect
-                child: ScrollConfiguration(
-                  behavior: NoGlowScrollBehavior(),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Height(30),
-                        CustomText(
-                          "What is the Pomodoro Method?",
-                          UtilsColors.darkPink,
-                          CustomSize.width(context, 10.1),
-                          FontWeight.w500,
-                          TextAlign.left,
-                          "RobotoSlab",
-                        ),
-                        Height(CustomSize.height(context, 10)),
-                        CustomText(
-                          "The Pomodoro Technique is a time management method designed to help you focus and get more done in less time. It uses short work intervals, called “Pomodoros,” followed by regular breaks to keep you productive and refreshed.",
-                          UtilsColors.black,
-                          CustomSize.width(context, 8.5),
-                          FontWeight.w500,
-                          TextAlign.left,
-                          "DMMono",
-                        ),
-                        Height(CustomSize.height(context, 23)),
-                        CustomText(
-                          "How Does It Work?",
-                          UtilsColors.darkPink,
-                          CustomSize.width(context, 10.1),
-                          FontWeight.w500,
-                          TextAlign.left,
-                          "RobotoSlab",
-                        ),
-                        Height(CustomSize.height(context, 10)),
-                        CustomRichText("Choose a Task: ",
-                            "Pick something you want to focus on."),
-                        CustomRichText("Set a Timer: ",
-                            "Work on the task for 25 minutes (1 Pomodoro)."),
-                        CustomRichText("Take a Short Break: ",
-                            "After 25 minutes, rest for 5 minutes."),
-                        CustomRichText("Repeat: ",
-                            "After 4 Pomodoros, take a longer break (15–30 minutes)."),
-                        Height(CustomSize.height(context, 23)),
-                        CustomText(
-                          "Why Use the Pomodoro Method?",
-                          UtilsColors.darkPink,
-                          CustomSize.width(context, 10.1),
-                          FontWeight.w500,
-                          TextAlign.left,
-                          "RobotoSlab",
-                        ),
-                        Height(CustomSize.height(context, 10)),
-                        CustomRichText("Boost Productivity: ",
-                            "Focus deeply for short periods."),
-                        CustomRichText("Reduce Burnout: ",
-                            "Regular breaks help you stay fresh."),
-                        CustomRichText("Improve Time Awareness: ",
-                            "Understand how long tasks take."),
-                        CustomRichText(
-                            "Stay Motivated: ", "Small wins keep you going!"),
-                        Height(CustomSize.height(context, 23)),
-                        CustomText(
-                          "Tips for Success",
-                          UtilsColors.darkPink,
-                          CustomSize.width(context, 10.1),
-                          FontWeight.w500,
-                          TextAlign.left,
-                          "RobotoSlab",
-                        ),
-                        Height(CustomSize.height(context, 10)),
-                        CustomText(
-                          "Eliminate distractions during your Pomodoro. Use breaks to relax, stretch, or grab a drink. Adjust intervals if needed to fit your work style.",
-                          UtilsColors.black,
-                          CustomSize.width(context, 8.5),
-                          FontWeight.w500,
-                          TextAlign.left,
-                          "DMMono",
-                        ),
-                        Height(30),
-                      ],
-                    ),
-                  ),
-                ),
+            // Text in Box Part
+            Transform.translate(
+              offset: Offset(0, -CustomSize.height(context, 27)),
+              child: Container(
+                alignment: Alignment.center,
+                width: double.infinity,
+                height: CustomSize.height(context, 10.3),
+                margin: EdgeInsets.symmetric(
+                    horizontal: CustomSize.width(context, 13)),
+                decoration: BoxDecoration(
+                    color: UtilsColors.bg,
+                    boxShadow: [
+                      BoxShadow(
+                          color: UtilsColors.black.withOpacity(0.2),
+                          blurRadius: CustomSize.height(context, 71))
+                    ],
+                    borderRadius:
+                        BorderRadius.circular(CustomSize.width(context, 45))),
+                child: CustomText(
+                    "All Completed Tasks",
+                    UtilsColors.black,
+                    CustomSize.width(context, 7.9),
+                    FontWeight.w500,
+                    TextAlign.center,
+                    "RobotoMono"),
               ),
             ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: CustomSize.width(context, 13)),
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Text Part
+                    CustomText(
+                      "Completed",
+                      UtilsColors.pink,
+                      CustomSize.height(context, 19),
+                      FontWeight.w500,
+                      TextAlign.center,
+                      "Inter",
+                    ),
+                    Height(35),
+                    // Tasks Part
+                    CustomCompletedTaskMaker("Read Book", false),
+                    CustomCompletedTaskMaker("Do Flutter hw", false),
+                    CustomCompletedTaskMaker("Practice Russian", false),
+                    CustomCompletedTaskMaker("Watch Bootcamp", false),
+                    CustomCompletedTaskMaker("Continue Projects", false),
+                    CustomCompletedTaskMaker("Solve Leetcode problem", true),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
     );
-  }
-}
-
-// Disabling the Scroll Effect
-class NoGlowScrollBehavior extends ScrollBehavior {
-  @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
-    return child;
   }
 }
