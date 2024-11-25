@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_rich_text.dart';
+import 'package:pomodoro/customs/custom_scroll_disabler.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
-import 'package:pomodoro/main.dart';
-import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 
@@ -21,214 +20,227 @@ class _InstructionScreenState extends State<InstructionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: UtilsColors.bg,
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: UtilsColors.bg,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          elevation: 5,
-          currentIndex: _currentIndex,
-          onTap: (value) {
-            setState(() {
-              _currentIndex = value;
-              if (value == 0) {
-                context.go("/home");
-              } else if (value == 2) {
-                context.go("/completed_tasks");
-              }
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-                label: "",
-                backgroundColor: Colors.white,
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt1),
-                  height: CustomSize.width(context, 11),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt1Chosen),
-                  height: CustomSize.width(context, 11),
-                )),
-            BottomNavigationBarItem(
-                label: "",
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt2),
-                  height: CustomSize.width(context, 11),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt2Chosen),
-                  height: CustomSize.width(context, 11),
-                )),
-            BottomNavigationBarItem(
-                label: "",
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt3),
-                  height: CustomSize.width(context, 12.7),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt3Chosen),
-                  height: CustomSize.width(context, 12.7),
-                )),
-            BottomNavigationBarItem(
-                label: "",
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt4),
-                  height: CustomSize.width(context, 11),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt4Chosen),
-                  height: CustomSize.width(context, 11),
-                ))
-          ]),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            // App Bar Simulator
-            ClipRect(
-              child: Container(
-                height: CustomSize.height(context, 6.5),
-                color: UtilsColors.pink,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomLeft,
-                          child: Image(
-                            image: AssetImage(ImgPaths.appBarCircleLeft),
-                            width: CustomSize.width(context, 4),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        // Big Black Tomato Center
-                        Transform.translate(
-                          offset: Offset(CustomSize.width(context, 31),
-                              -CustomSize.width(context, 90)),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 7.7),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Small Black Tomato
-                        Transform.translate(
-                          offset: Offset(CustomSize.width(context, 5.1),
-                              -CustomSize.width(context, 63)),
-                          child: Container(
-                            alignment: Alignment.bottomLeft,
-                            child: Image(
-                              image:
-                                  AssetImage(ImgPaths.appBarTomatoBlackSmall),
-                              width: CustomSize.width(context, 14.3),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Big Black Tomato Corner
-                        Transform.translate(
-                          offset: Offset(-CustomSize.width(context, 30),
-                              CustomSize.width(context, 37)),
-                          child: Container(
-                            alignment: Alignment.bottomLeft,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 8),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Text Part
-                    Transform.translate(
-                      offset: Offset(-CustomSize.width(context, 37), 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor: UtilsColors.bg,
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: UtilsColors.bg,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            elevation: 5,
+            currentIndex: _currentIndex,
+            onTap: (value) {
+              setState(() {
+                _currentIndex = value;
+                if (value == 0) {
+                  context.go("/home");
+                } else if (value == 2) {
+                  context.go("/completed_tasks");
+                }else if (value == 1) {
+                  context.go("/tasks");
+                }
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                  label: "",
+                  backgroundColor: Colors.white,
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt1),
+                    height: CustomSize.width(context, 11),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt1Chosen),
+                    height: CustomSize.width(context, 11),
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt2),
+                    height: CustomSize.width(context, 11),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt2Chosen),
+                    height: CustomSize.width(context, 11),
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt3),
+                    height: CustomSize.width(context, 12.7),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt3Chosen),
+                    height: CustomSize.width(context, 12.7),
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt4),
+                    height: CustomSize.width(context, 11),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt4Chosen),
+                    height: CustomSize.width(context, 11),
+                  ))
+            ]),
+        body: ScrollConfiguration(
+          behavior: NoGlowScrollBehavior(),
+          child: CustomScrollView(
+            slivers: [
+              // SliverAppBar to simulate the fixed app bar
+              SliverAppBar(
+                pinned:
+                    false, // This keeps the app bar fixed at the top while scrolling
+                expandedHeight:
+                    CustomSize.height(context, 6.5), // Height of the app bar
+                flexibleSpace: FlexibleSpaceBar(
+                  background: ClipRect(
+                    child: Container(
+                      height: CustomSize.height(context, 6.5),
+                      color: UtilsColors.pink,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CustomText(
-                              "Instruction",
-                              UtilsColors.bg,
-                              CustomSize.width(context, 16.3),
-                              FontWeight.w500,
-                              TextAlign.center,
-                              "PatuaOne"),
+                          Stack(
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                child: Image(
+                                  image: AssetImage(ImgPaths.appBarCircleLeft),
+                                  width: CustomSize.width(context, 4),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              // Big Black Tomato Center
+                              Transform.translate(
+                                offset: Offset(CustomSize.width(context, 31),
+                                    -CustomSize.width(context, 90)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Image(
+                                    image:
+                                        AssetImage(ImgPaths.appBarTomatoBlack),
+                                    width: CustomSize.width(context, 7.7),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              // Small Black Tomato
+                              Transform.translate(
+                                offset: Offset(CustomSize.width(context, 5.1),
+                                    -CustomSize.width(context, 63)),
+                                child: Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Image(
+                                    image: AssetImage(
+                                        ImgPaths.appBarTomatoBlackSmall),
+                                    width: CustomSize.width(context, 14.3),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              // Big Black Tomato Corner
+                              Transform.translate(
+                                offset: Offset(-CustomSize.width(context, 30),
+                                    CustomSize.width(context, 37)),
+                                child: Container(
+                                  alignment: Alignment.bottomLeft,
+                                  child: Image(
+                                    image:
+                                        AssetImage(ImgPaths.appBarTomatoBlack),
+                                    width: CustomSize.width(context, 8),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // Text Part
+                          Transform.translate(
+                            offset: Offset(-CustomSize.width(context, 37), 0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CustomText(
+                                  "Instruction",
+                                  UtilsColors.bg,
+                                  CustomSize.width(context, 16.3),
+                                  FontWeight.w500,
+                                  TextAlign.center,
+                                  "PatuaOne",
+                                ),
+                              ],
+                            ),
+                          ),
+                          Stack(
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomRight,
+                                child: Image(
+                                  image: AssetImage(ImgPaths.appBarCircleRight),
+                                  width: CustomSize.width(context, 5),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              // Small Black Tomato
+                              Transform.translate(
+                                offset: Offset(-CustomSize.width(context, 70),
+                                    -CustomSize.width(context, 35)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Image(
+                                    image: AssetImage(
+                                        ImgPaths.appBarTomatoBlackSmall),
+                                    width: CustomSize.width(context, 14.3),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              // Big Black Tomato Center
+                              Transform.translate(
+                                offset: Offset(CustomSize.width(context, 15),
+                                    -CustomSize.width(context, 17)),
+                                child: Container(
+                                  alignment: Alignment.bottomRight,
+                                  child: Image(
+                                    image:
+                                        AssetImage(ImgPaths.appBarTomatoBlack),
+                                    width: CustomSize.width(context, 7.7),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                              // Big Black Tomato Left
+                              Transform.translate(
+                                offset: Offset(-CustomSize.width(context, 13.9),
+                                    CustomSize.width(context, 37)),
+                                child: Container(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Image(
+                                    image:
+                                        AssetImage(ImgPaths.appBarTomatoBlack),
+                                    width: CustomSize.width(context, 8),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
-                    Stack(
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomRight,
-                          child: Image(
-                            image: AssetImage(ImgPaths.appBarCircleRight),
-                            width: CustomSize.width(context, 5),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        // Small Black Tomato
-                        Transform.translate(
-                          offset: Offset(-CustomSize.width(context, 70),
-                              -CustomSize.width(context, 35)),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Image(
-                              image:
-                                  AssetImage(ImgPaths.appBarTomatoBlackSmall),
-                              width: CustomSize.width(context, 14.3),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Big Black Tomato Center
-                        Transform.translate(
-                          offset: Offset(CustomSize.width(context, 15),
-                              -CustomSize.width(context, 17)),
-                          child: Container(
-                            alignment: Alignment.bottomRight,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 7.7),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Big Black Tomato Left
-                        Transform.translate(
-                          offset: Offset(-CustomSize.width(context, 13.9),
-                              CustomSize.width(context, 37)),
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 8),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
+                  ),
                 ),
               ),
-            ),
-            // Instructions Part
-            Expanded(
-              child: Padding(
+
+              // Instructions Part as SliverPadding
+              SliverPadding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: CustomSize.width(context, 27),
-                ),
-                // Disabling the Scroll Effect
-                child: ScrollConfiguration(
-                  behavior: NoGlowScrollBehavior(),
-                  child: SingleChildScrollView(
+                    horizontal: CustomSize.width(context, 27)),
+                sliver: SliverToBoxAdapter(
+                  child: SizedBox(
+                    width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -310,19 +322,8 @@ class _InstructionScreenState extends State<InstructionScreen> {
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Disabling the Scroll Effect
-class NoGlowScrollBehavior extends ScrollBehavior {
-  @override
-  Widget buildOverscrollIndicator(
-      BuildContext context, Widget child, ScrollableDetails details) {
-    return child;
+            ],
+          ),
+        ));
   }
 }
