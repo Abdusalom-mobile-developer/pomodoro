@@ -55,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 context.go("/instruction");
               } else if (value == 2) {
                 context.go("/completed_tasks");
+              }else if (value == 1) {
+                context.go("/tasks");
               }
             });
           },

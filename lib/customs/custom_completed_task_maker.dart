@@ -5,9 +5,11 @@ import 'package:pomodoro/utils/colors.dart';
 
 // ignore: must_be_immutable
 class CustomCompletedTaskMaker extends StatelessWidget {
-  String content;
-  bool isLast;
-  CustomCompletedTaskMaker(this.content, this.isLast, {super.key});
+  String content, time;
+  bool isLast, isCompleted;
+  CustomCompletedTaskMaker(
+      this.content, this.isLast, this.time, this.isCompleted,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,21 +30,23 @@ class CustomCompletedTaskMaker extends StatelessWidget {
                         color: UtilsColors.black.withOpacity(0.5),
                         fontSize: CustomSize.height(context, 47),
                         fontFamily: "Inter",
-                        decoration: TextDecoration.lineThrough,
+                        decoration: isCompleted
+                            ? TextDecoration.lineThrough
+                            : TextDecoration.none,
                         decorationColor: UtilsColors.black.withOpacity(0.5)),
                   ),
                   Text(
-                    "16/07/2024",
+                    time,
                     style: TextStyle(
-                        color: UtilsColors.black.withOpacity(0.5),
-                        fontSize: CustomSize.height(context, 57),
-                        fontFamily: "Inter",
-                        decorationColor: UtilsColors.black.withOpacity(0.5)),
+                      color: UtilsColors.black.withOpacity(0.5),
+                      fontSize: CustomSize.height(context, 57),
+                      fontFamily: "Inter",
+                    ),
                   ),
                 ],
               ),
               Icon(
-                Icons.check_circle,
+                isCompleted ? Icons.check_circle : Icons.circle_outlined,
                 color: UtilsColors.pink,
                 size: CustomSize.height(context, 29),
               )
