@@ -87,7 +87,9 @@ class _TasksScreenState extends State<TasksScreen> {
                   ))
             ]),
         // Task Adding Button
-        floatingActionButton: CustomButtonAdd("New Task ", () {}),
+        floatingActionButton: CustomButtonAdd("New Task ", () {
+          context.go("/task_adding");
+        }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: ScrollConfiguration(
           behavior: NoGlowScrollBehavior(),

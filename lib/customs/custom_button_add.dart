@@ -32,7 +32,7 @@ class CustomButtonAdd extends StatelessWidget {
                     color: UtilsColors.bg,
                     fontSize: CustomSize.height(context, 43)),
               ),
-              Icon(Icons.add,
+              Icon(Icons.add_rounded,
                   color: UtilsColors.bg, size: CustomSize.height(context, 25))
             ],
           )),
