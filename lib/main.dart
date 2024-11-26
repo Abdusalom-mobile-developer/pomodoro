@@ -7,6 +7,7 @@ import 'package:pomodoro/screens/completed_tasks.dart';
 import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/screens/instruction.dart';
 import 'package:pomodoro/screens/splash.dart';
+import 'package:pomodoro/screens/task_adding_sc.dart';
 import 'package:pomodoro/screens/unfinished_tasks.dart';
 import 'package:provider/provider.dart';
 
@@ -93,6 +94,19 @@ final GoRouter _router = GoRouter(initialLocation: "/splash", routes: [
       transitionDuration: const Duration(milliseconds: 450),
       key: state.pageKey,
       child: const TasksScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(
+        opacity: CurveTween(curve: Curves.easeInBack).animate(animation),
+        child: child,
+      ),
+    ),
+  ),
+  GoRoute(
+    path: "/task_adding",
+    pageBuilder: (context, state) => CustomTransitionPage(
+      transitionDuration: const Duration(milliseconds: 450),
+      key: state.pageKey,
+      child: const TaskAddingSc(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(
         opacity: CurveTween(curve: Curves.easeInBack).animate(animation),

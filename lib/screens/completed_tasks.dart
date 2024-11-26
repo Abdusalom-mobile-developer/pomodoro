@@ -4,6 +4,7 @@ import 'package:pomodoro/customs/custom_completed_task_maker.dart';
 import 'package:pomodoro/customs/custom_scroll_disabler.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
+import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/providers/completed_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
@@ -17,7 +18,7 @@ class CompletedTasksScreen extends StatefulWidget {
 }
 
 class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
-  int currentIndex = 0;
+  int currentIndex = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -304,6 +305,7 @@ class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
                     ),
                   ),
                 ),
+                SliverList.list(children: [Height(35)])
               ],
             ),
           ),
