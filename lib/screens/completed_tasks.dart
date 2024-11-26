@@ -18,7 +18,7 @@ class CompletedTasksScreen extends StatefulWidget {
 }
 
 class _CompletedTasksScreenState extends State<CompletedTasksScreen> {
-  int currentIndex = 0;
+  int currentIndex = 2;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

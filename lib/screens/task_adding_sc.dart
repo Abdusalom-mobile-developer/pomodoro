@@ -2,21 +2,41 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
+import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 
-class TaskAddingSc extends StatelessWidget {
+class TaskAddingSc extends StatefulWidget {
   const TaskAddingSc({super.key});
+
+  @override
+  State<TaskAddingSc> createState() => _TaskAddingScState();
+}
+
+class _TaskAddingScState extends State<TaskAddingSc> {
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.requestFocus();
+  }
+
+  TextEditingController controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: UtilsColors.bg,
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.only(bottom: CustomSize.height(context, 25)),
+          child: Column(children: [
             // App Bar Part
             ClipRect(
               child: Container(
@@ -150,67 +170,135 @@ class TaskAddingSc extends StatelessWidget {
                 ),
               ),
             ),
-            Height(30),
+            Height(23),
             // Bottom Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Left Button
-                Container(
-                  alignment: Alignment.center,
-                  width: CustomSize.width(context, 3),
-                  height: CustomSize.height(context, 13.7),
-                  decoration: BoxDecoration(
-                    color: UtilsColors.pink,
-                    borderRadius:
-                        BorderRadius.circular(CustomSize.width(context, 35)),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: CustomSize.width(context, 13),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _focusNode.requestFocus();
+                    },
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      height: CustomSize.height(context, 8.7),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(
+                              color: UtilsColors.pink,
+                              width: CustomSize.height(context, 300)),
+                          borderRadius: BorderRadius.circular(
+                              CustomSize.width(context, 35))),
+                      child: TextField(
+                        focusNode: _focusNode,
+                        controller: controller,
+                        onSubmitted: (value) {
+                          controller.clear();
+                        },
+                        cursorColor: UtilsColors.black,
+                        style: TextStyle(
+                            color: UtilsColors.black,
+                            fontSize: CustomSize.height(context, 43),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "Inter",
+                            decoration: TextDecoration.none,
+                            decorationThickness: 0,
+                            decorationColor: Colors.transparent),
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(
+                                borderSide: BorderSide.none),
+                            hintText: "Task title",
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "Inter",
+                                color: UtilsColors.black,
+                                fontSize: CustomSize.height(context, 43))),
+                      ),
+                    ),
                   ),
-                  child: TextButton(
-                      onPressed: () {
-                        context.go("/tasks");
-                      },
-                      child: CustomText(
-                          "Back",
-                          UtilsColors.bg,
-                          CustomSize.height(context, 19),
-                          FontWeight.w500,
-                          TextAlign.center,
-                          "Inter")),
-                ),
-                SizedBox(
-                  width: CustomSize.width(context, 25),
-                ),
-                // Right Button
-                Container(
-                  alignment: Alignment.center,
-                  width: CustomSize.width(context, 3),
-                  height: CustomSize.height(context, 13.7),
-                  decoration: BoxDecoration(
-                    color: UtilsColors.pink,
-                    borderRadius:
-                        BorderRadius.circular(CustomSize.width(context, 35)),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Height(30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButton(
-                          onPressed: () {},
-                          child: CustomText(
-                              "Add ",
-                              UtilsColors.bg,
-                              CustomSize.height(context, 19),
-                              FontWeight.w500,
-                              TextAlign.center,
-                              "Inter")),
-                      Icon(Icons.add_rounded,
-                          color: UtilsColors.bg,
-                          size: CustomSize.height(context, 31))
+                      Container(
+                        width: CustomSize.width(context, 6.7),
+                        height: CustomSize.height(context, 13),
+                        decoration: BoxDecoration(
+                            color: UtilsColors.pink, shape: BoxShape.circle),
+                        child: IconButton(
+                            onPressed: () {
+                              context.go("/tasks");
+                            },
+                            icon: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: UtilsColors.bg,
+                              size: CustomSize.height(context, 35),
+                            )),
+                      ),
+                      // Right Button
+                      Container(
+                        alignment: Alignment.center,
+                        width: CustomSize.width(context, 2.9),
+                        height: CustomSize.height(context, 13.5),
+                        decoration: BoxDecoration(
+                            color: UtilsColors.pink,
+                            borderRadius: BorderRadius.circular(
+                                CustomSize.height(context, 45))),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                                onPressed: () {},
+                                child: CustomText(
+                                    "Add ",
+                                    UtilsColors.bg,
+                                    CustomSize.height(context, 19),
+                                    FontWeight.w500,
+                                    TextAlign.center,
+                                    "Inter")),
+                            Icon(Icons.add_rounded,
+                                color: UtilsColors.bg,
+                                size: CustomSize.height(context, 31))
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            )
-          ],
+
+                  // Left Button
+                  // Container(
+                  //   alignment: Alignment.center,
+                  //   width: CustomSize.width(context, 3),
+                  //   height: CustomSize.height(context, 13.7),
+                  //   decoration: BoxDecoration(
+                  //     color: Colors.transparent,
+                  //     border: Border.all(
+                  //         color: UtilsColors.pink,
+                  //         width: CustomSize.height(context, 300)),
+                  //     borderRadius:
+                  //         BorderRadius.circular(CustomSize.width(context, 35)),
+                  //   ),
+                  //   child: TextButton(
+                  //       onPressed: () {
+                  //         context.go("/tasks");
+                  //       },
+                  //       child: CustomText(
+                  //           "Back",
+                  //           UtilsColors.pink,
+                  //           CustomSize.height(context, 19),
+                  //           FontWeight.w500,
+                  //           TextAlign.center,
+                  //           "Inter")),
+                  // ),
+                ],
+              ),
+            ),
+          ]),
         ),
       ),
     );
