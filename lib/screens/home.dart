@@ -7,6 +7,7 @@ import 'package:pomodoro/customs/custom_timer_buttons.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
+import 'package:pomodoro/providers/time_picking.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
@@ -245,19 +246,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Height(20),
               // Time Choosing Part
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomTimerButtons(false, "Pomodoro"),
-                  SizedBox(
-                    width: CustomSize.width(context, 50),
-                  ),
-                  CustomTimerButtons(false, "Short Break"),
-                  SizedBox(
-                    width: CustomSize.width(context, 50),
-                  ),
-                  CustomTimerButtons(true, "Long Break"),
-                ],
+              Consumer<TimePicking>(
+                builder: (context, timePicker, child) => Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: CustomSize.width(context, 29)),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: timePicker.buttons),
+                ),
               ),
               // Time Showing Tomato Part
               Container(

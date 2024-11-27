@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/providers/completed_tasks.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
+import 'package:pomodoro/providers/time_picking.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/screens/completed_tasks.dart';
 import 'package:pomodoro/screens/home.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(create: (context) => CompletedTasks()),
         ChangeNotifierProvider(create: (context) => HomeScreenAll()),
+        ChangeNotifierProvider(create: (context) => TimePicking())
       ],
       builder: (context, child) => MaterialApp.router(
         theme: ThemeData(
