@@ -6,9 +6,11 @@ import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/custom_timer_buttons.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -39,352 +41,356 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: UtilsColors.bg,
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: UtilsColors.bg,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          elevation: 5,
-          currentIndex: currentIndex,
-          onTap: (value) {
-            setState(() {
-              currentIndex = value;
-              if (value == 3) {
-                context.go("/instruction");
-              } else if (value == 2) {
-                context.go("/completed_tasks");
-              } else if (value == 1) {
-                context.go("/tasks");
-              }
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-                label: "",
-                backgroundColor: Colors.white,
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt1),
-                  height: CustomSize.width(context, 11),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt1Chosen),
-                  height: CustomSize.width(context, 11),
-                )),
-            BottomNavigationBarItem(
-                label: "",
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt2),
-                  height: CustomSize.width(context, 11),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt2Chosen),
-                  height: CustomSize.width(context, 11),
-                )),
-            BottomNavigationBarItem(
-                label: "",
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt3),
-                  height: CustomSize.width(context, 12.7),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt3Chosen),
-                  height: CustomSize.width(context, 12.7),
-                )),
-            BottomNavigationBarItem(
-                label: "",
-                icon: Image(
-                  image: AssetImage(ImgPaths.navOpt4),
-                  height: CustomSize.width(context, 11),
-                ),
-                activeIcon: Image(
-                  image: AssetImage(ImgPaths.navOpt4Chosen),
-                  height: CustomSize.width(context, 11),
-                ))
-          ]),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            // App Bar Simulator
-            ClipRect(
-              child: Container(
-                height: CustomSize.height(context, 6.5),
-                color: UtilsColors.pink,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomLeft,
-                          child: Image(
-                            image: AssetImage(ImgPaths.appBarCircleLeft),
-                            width: CustomSize.width(context, 4),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        // Big Black Tomato Center
-                        Transform.translate(
-                          offset: Offset(CustomSize.width(context, 31),
-                              -CustomSize.width(context, 90)),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 7.7),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Small Black Tomato
-                        Transform.translate(
-                          offset: Offset(CustomSize.width(context, 5.1),
-                              -CustomSize.width(context, 63)),
-                          child: Container(
-                            alignment: Alignment.bottomLeft,
-                            child: Image(
-                              image:
-                                  AssetImage(ImgPaths.appBarTomatoBlackSmall),
-                              width: CustomSize.width(context, 14.3),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Big Black Tomato Corner
-                        Transform.translate(
-                          offset: Offset(-CustomSize.width(context, 30),
-                              CustomSize.width(context, 37)),
-                          child: Container(
-                            alignment: Alignment.bottomLeft,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 8),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Text Part
-                    Transform.translate(
-                      offset: Offset(-CustomSize.width(context, 37), 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+    return Consumer<HomeScreenAll>(
+      builder: (context, provider, child) => Scaffold(
+        backgroundColor: UtilsColors.bg,
+        bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: UtilsColors.bg,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            elevation: 5,
+            currentIndex: currentIndex,
+            onTap: (value) {
+              setState(() {
+                currentIndex = value;
+                if (value == 3) {
+                  context.go("/instruction");
+                } else if (value == 2) {
+                  context.go("/completed_tasks");
+                } else if (value == 1) {
+                  context.go("/tasks");
+                }
+              });
+            },
+            items: [
+              BottomNavigationBarItem(
+                  label: "",
+                  backgroundColor: Colors.white,
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt1),
+                    height: CustomSize.width(context, 11),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt1Chosen),
+                    height: CustomSize.width(context, 11),
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt2),
+                    height: CustomSize.width(context, 11),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt2Chosen),
+                    height: CustomSize.width(context, 11),
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt3),
+                    height: CustomSize.width(context, 12.7),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt3Chosen),
+                    height: CustomSize.width(context, 12.7),
+                  )),
+              BottomNavigationBarItem(
+                  label: "",
+                  icon: Image(
+                    image: AssetImage(ImgPaths.navOpt4),
+                    height: CustomSize.width(context, 11),
+                  ),
+                  activeIcon: Image(
+                    image: AssetImage(ImgPaths.navOpt4Chosen),
+                    height: CustomSize.width(context, 11),
+                  ))
+            ]),
+        body: SizedBox(
+          width: double.infinity,
+          child: Column(
+            children: [
+              // App Bar Simulator
+              ClipRect(
+                child: Container(
+                  height: CustomSize.height(context, 6.5),
+                  color: UtilsColors.pink,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Stack(
                         children: [
-                          CustomText(
-                              "Pomodoro",
-                              UtilsColors.bg,
-                              CustomSize.width(context, 16.3),
-                              FontWeight.w500,
-                              TextAlign.center,
-                              "PatuaOne"),
+                          Container(
+                            alignment: Alignment.bottomLeft,
+                            child: Image(
+                              image: AssetImage(ImgPaths.appBarCircleLeft),
+                              width: CustomSize.width(context, 4),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          // Big Black Tomato Center
+                          Transform.translate(
+                            offset: Offset(CustomSize.width(context, 31),
+                                -CustomSize.width(context, 90)),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Image(
+                                image: AssetImage(ImgPaths.appBarTomatoBlack),
+                                width: CustomSize.width(context, 7.7),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          // Small Black Tomato
+                          Transform.translate(
+                            offset: Offset(CustomSize.width(context, 5.1),
+                                -CustomSize.width(context, 63)),
+                            child: Container(
+                              alignment: Alignment.bottomLeft,
+                              child: Image(
+                                image:
+                                    AssetImage(ImgPaths.appBarTomatoBlackSmall),
+                                width: CustomSize.width(context, 14.3),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          // Big Black Tomato Corner
+                          Transform.translate(
+                            offset: Offset(-CustomSize.width(context, 30),
+                                CustomSize.width(context, 37)),
+                            child: Container(
+                              alignment: Alignment.bottomLeft,
+                              child: Image(
+                                image: AssetImage(ImgPaths.appBarTomatoBlack),
+                                width: CustomSize.width(context, 8),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                    Stack(
-                      children: [
-                        Container(
-                          alignment: Alignment.bottomRight,
-                          child: Image(
-                            image: AssetImage(ImgPaths.appBarCircleRight),
-                            width: CustomSize.width(context, 5),
-                            fit: BoxFit.fill,
-                          ),
+                      // Text Part
+                      Transform.translate(
+                        offset: Offset(-CustomSize.width(context, 37), 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomText(
+                                "Pomodoro",
+                                UtilsColors.bg,
+                                CustomSize.width(context, 16.3),
+                                FontWeight.w500,
+                                TextAlign.center,
+                                "PatuaOne"),
+                          ],
                         ),
-                        // Small Black Tomato
-                        Transform.translate(
-                          offset: Offset(-CustomSize.width(context, 70),
-                              -CustomSize.width(context, 35)),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: Image(
-                              image:
-                                  AssetImage(ImgPaths.appBarTomatoBlackSmall),
-                              width: CustomSize.width(context, 14.3),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        // Big Black Tomato Center
-                        Transform.translate(
-                          offset: Offset(CustomSize.width(context, 15),
-                              -CustomSize.width(context, 17)),
-                          child: Container(
+                      ),
+                      Stack(
+                        children: [
+                          Container(
                             alignment: Alignment.bottomRight,
                             child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 7.7),
+                              image: AssetImage(ImgPaths.appBarCircleRight),
+                              width: CustomSize.width(context, 5),
                               fit: BoxFit.fill,
                             ),
                           ),
-                        ),
-                        // Big Black Tomato Left
-                        Transform.translate(
-                          offset: Offset(-CustomSize.width(context, 13.9),
-                              CustomSize.width(context, 37)),
-                          child: Container(
-                            alignment: Alignment.bottomCenter,
-                            child: Image(
-                              image: AssetImage(ImgPaths.appBarTomatoBlack),
-                              width: CustomSize.width(context, 8),
-                              fit: BoxFit.fill,
+                          // Small Black Tomato
+                          Transform.translate(
+                            offset: Offset(-CustomSize.width(context, 70),
+                                -CustomSize.width(context, 35)),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Image(
+                                image:
+                                    AssetImage(ImgPaths.appBarTomatoBlackSmall),
+                                width: CustomSize.width(context, 14.3),
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                          // Big Black Tomato Center
+                          Transform.translate(
+                            offset: Offset(CustomSize.width(context, 15),
+                                -CustomSize.width(context, 17)),
+                            child: Container(
+                              alignment: Alignment.bottomRight,
+                              child: Image(
+                                image: AssetImage(ImgPaths.appBarTomatoBlack),
+                                width: CustomSize.width(context, 7.7),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          // Big Black Tomato Left
+                          Transform.translate(
+                            offset: Offset(-CustomSize.width(context, 13.9),
+                                CustomSize.width(context, 37)),
+                            child: Container(
+                              alignment: Alignment.bottomCenter,
+                              child: Image(
+                                image: AssetImage(ImgPaths.appBarTomatoBlack),
+                                width: CustomSize.width(context, 8),
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Height(20),
+              // Time Choosing Part
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomTimerButtons(false, "Pomodoro"),
+                  SizedBox(
+                    width: CustomSize.width(context, 50),
+                  ),
+                  CustomTimerButtons(false, "Short Break"),
+                  SizedBox(
+                    width: CustomSize.width(context, 50),
+                  ),
+                  CustomTimerButtons(true, "Long Break"),
+                ],
+              ),
+              // Time Showing Tomato Part
+              Container(
+                alignment: Alignment.center,
+                height: CustomSize.height(context, 2.5),
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: Image(
+                        image: AssetImage(ImgPaths.bigTomato),
+                        fit: BoxFit.fill,
+                        width: CustomSize.width(context, 1.1),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: CustomSize.height(context, 12),
+                            width: CustomSize.width(context, 5.3),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: UtilsColors.black.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(
+                                    CustomSize.width(context, 30))),
+                            child: CustomText(
+                                provider.minutes.toString().padLeft(2, "0"),
+                                UtilsColors.bg,
+                                CustomSize.width(context, 19),
+                                FontWeight.w500,
+                                TextAlign.center,
+                                "RobotoMono"),
+                          ),
+                          // Middle Double Circles
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: CustomSize.width(context, 70)),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  size: CustomSize.width(context, 35),
+                                  color: UtilsColors.bg,
+                                ),
+                                Height(90),
+                                Icon(
+                                  Icons.circle,
+                                  size: CustomSize.width(context, 35),
+                                  color: UtilsColors.bg,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: CustomSize.height(context, 12),
+                            width: CustomSize.width(context, 5.3),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                color: UtilsColors.black.withOpacity(0.4),
+                                borderRadius: BorderRadius.circular(
+                                    CustomSize.width(context, 30))),
+                            child: CustomText(
+                                provider.seconds.toString().padLeft(2, "0"),
+                                UtilsColors.bg,
+                                CustomSize.width(context, 19),
+                                FontWeight.w500,
+                                TextAlign.center,
+                                "RobotoMono"),
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
               ),
-            ),
-            Height(20),
-            // Time Choosing Part
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomTimerButtons(false, "Pomodoro"),
-                SizedBox(
-                  width: CustomSize.width(context, 50),
-                ),
-                CustomTimerButtons(false, "Short Break"),
-                SizedBox(
-                  width: CustomSize.width(context, 50),
-                ),
-                CustomTimerButtons(true, "Long Break"),
-              ],
-            ),
-            // Time Showing Tomato Part
-            Container(
-              alignment: Alignment.center,
-              height: CustomSize.height(context, 2.5),
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Image(
-                      image: AssetImage(ImgPaths.bigTomato),
-                      fit: BoxFit.fill,
-                      width: CustomSize.width(context, 1.1),
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
+              // Task Picking Part
+              Container(
+                alignment: Alignment.center,
+                width: CustomSize.width(context, 1.5),
+                height: CustomSize.height(context, 13),
+                decoration: BoxDecoration(
+                    color: UtilsColors.pink.withOpacity(0.1),
+                    borderRadius:
+                        BorderRadius.circular(CustomSize.height(context, 45))),
+                child: TextButton(
+                    onPressed: () {},
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          height: CustomSize.height(context, 12),
-                          width: CustomSize.width(context, 5.3),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: UtilsColors.black.withOpacity(0.4),
-                              borderRadius: BorderRadius.circular(
-                                  CustomSize.width(context, 30))),
-                          child: CustomText(
-                              "25",
-                              UtilsColors.bg,
-                              CustomSize.width(context, 19),
-                              FontWeight.w500,
-                              TextAlign.center,
-                              "RobotoMono"),
+                        Row(
+                          children: [
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Icon(
+                              Icons.list_alt_rounded,
+                              color: UtilsColors.pink,
+                              size: CustomSize.height(context, 31),
+                            ),
+                            const SizedBox(
+                              width: 7,
+                            ),
+                            Text(
+                              "Pick a Task",
+                              style: TextStyle(
+                                  color: UtilsColors.pink,
+                                  fontSize: CustomSize.height(context, 45)),
+                            ),
+                          ],
                         ),
-                        // Middle Double Circles
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: CustomSize.width(context, 70)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.circle,
-                                size: CustomSize.width(context, 35),
-                                color: UtilsColors.bg,
-                              ),
-                              Height(90),
-                              Icon(
-                                Icons.circle,
-                                size: CustomSize.width(context, 35),
-                                color: UtilsColors.bg,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: CustomSize.height(context, 12),
-                          width: CustomSize.width(context, 5.3),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: UtilsColors.black.withOpacity(0.4),
-                              borderRadius: BorderRadius.circular(
-                                  CustomSize.width(context, 30))),
-                          child: CustomText(
-                              "00",
-                              UtilsColors.bg,
-                              CustomSize.width(context, 19),
-                              FontWeight.w500,
-                              TextAlign.center,
-                              "RobotoMono"),
-                        ),
+                        Icon(
+                          Icons.add,
+                          color: UtilsColors.pink,
+                          size: CustomSize.height(context, 25),
+                        )
                       ],
-                    ),
-                  )
-                ],
+                    )),
               ),
-            ),
-            // Task Picking Part
-            Container(
-              alignment: Alignment.center,
-              width: CustomSize.width(context, 1.5),
-              height: CustomSize.height(context, 13),
-              decoration: BoxDecoration(
-                  color: UtilsColors.pink.withOpacity(0.1),
-                  borderRadius:
-                      BorderRadius.circular(CustomSize.height(context, 45))),
-              child: TextButton(
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Icon(
-                            Icons.list_alt_rounded,
-                            color: UtilsColors.pink,
-                            size: CustomSize.height(context, 31),
-                          ),
-                          const SizedBox(
-                            width: 7,
-                          ),
-                          Text(
-                            "Pick a Task",
-                            style: TextStyle(
-                                color: UtilsColors.pink,
-                                fontSize: CustomSize.height(context, 45)),
-                          ),
-                        ],
-                      ),
-                      Icon(
-                        Icons.add,
-                        color: UtilsColors.pink,
-                        size: CustomSize.height(context, 25),
-                      )
-                    ],
-                  )),
-            ),
-            Height(30),
-            // Start Button
-            CustomTimerSQ("Start", () {}),
-            // Height(30),
-            // Quit Button
-            // CustomTimerSQ("Quit", () {}),
-          ],
+              Height(30),
+              // Start Button
+              CustomTimerSQ("Start", () {
+                provider.isTimerWorking ? null : provider.startTimer();
+              }),
+              // Height(30),
+              // Quit Button
+              // CustomTimerSQ("Quit", () {}),
+            ],
+          ),
         ),
       ),
     );
