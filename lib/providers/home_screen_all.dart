@@ -3,9 +3,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class HomeScreenAll extends ChangeNotifier {
-  int minutes = 1;
+  int minutes = 25;
   int seconds = 0;
   bool isTimerWorking = false;
+
+  void changeCurrentTimerH(int value) {
+    if (value == 0) {
+      minutes = 25;
+    } else if (value == 1) {
+      minutes = 5;
+    } else {
+      minutes = 15;
+    }
+    seconds = 0;
+    notifyListeners();
+  }
 
   void startTimer() async {
     isTimerWorking = true;
@@ -33,7 +45,7 @@ class HomeScreenAll extends ChangeNotifier {
       }
     }
 
-    minutes = 1;
+    minutes = 25;
     seconds = 0;
     isTimerWorking = false;
     notifyListeners();
