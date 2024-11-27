@@ -243,17 +243,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Height(20),
+              Height(25),
               // Time Choosing Part
-              Consumer<TimePicking>(
-                builder: (context, timePicker, child) => Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: CustomSize.width(context, 29)),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: timePicker.buttons),
-                ),
-              ),
+              provider.isTimerWorking
+                  ? SizedBox(
+                      height: CustomSize.height(context, 19),
+                      child: CustomText(
+                          "Read book",
+                          UtilsColors.black,
+                          CustomSize.height(context, 25),
+                          FontWeight.w500,
+                          TextAlign.center,
+                          "RobotoMono"),
+                    )
+                  : Consumer<TimePicking>(
+                      builder: (context, timePicker, child) => Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: CustomSize.width(context, 29)),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: timePicker.buttons),
+                      ),
+                    ),
               // Time Showing Tomato Part
               Container(
                 alignment: Alignment.center,
@@ -397,7 +408,7 @@ void showMyDialog(BuildContext context) {
   showDialog(
     barrierDismissible: false,
     context: context,
-    builder: (context) => AlertDialog(
+    builder: (context) => AlertDialog.adaptive(
       backgroundColor: UtilsColors.bg,
       content: SizedBox(
         height: CustomSize.height(context, 7.5),

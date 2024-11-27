@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro/customs/custom_timer_buttons.dart';
+import 'package:pomodoro/providers/home_screen_all.dart';
+import 'package:provider/provider.dart';
 
 class TimePicking extends ChangeNotifier {
   int currentTimer = 0;
@@ -40,5 +42,7 @@ class TimePicking extends ChangeNotifier {
     }
 
     notifyListeners();
+    Provider.of<HomeScreenAll>(context, listen: false)
+        .changeCurrentTimerH(value);
   }
 }
