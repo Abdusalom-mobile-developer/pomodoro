@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
-import 'package:pomodoro/customs/custom_timer_buttons.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
