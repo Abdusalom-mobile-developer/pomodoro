@@ -5,6 +5,7 @@ import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/customs/modal_bottom_sheet.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/providers/time_picking.dart';
 import 'package:pomodoro/utils/colors.dart';
@@ -249,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? SizedBox(
                       height: CustomSize.height(context, 19),
                       child: CustomText(
-                          "Read book",
+                          provider.currentTask["task"],
                           UtilsColors.black,
                           CustomSize.height(context, 25),
                           FontWeight.w500,
@@ -354,7 +355,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius:
                         BorderRadius.circular(CustomSize.height(context, 45))),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      MyBottomSheet.showCustomBottomSheet(context);
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -366,23 +369,25 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icon(
                               Icons.list_alt_rounded,
                               color: UtilsColors.pink,
-                              size: CustomSize.height(context, 31),
+                              size: CustomSize.height(context, 33),
                             ),
                             const SizedBox(
                               width: 7,
                             ),
-                            Text(
+                            CustomText(
                               "Pick a Task",
-                              style: TextStyle(
-                                  color: UtilsColors.pink,
-                                  fontSize: CustomSize.height(context, 45)),
-                            ),
+                              UtilsColors.pink,
+                              CustomSize.height(context, 17),
+                              FontWeight.w500,
+                              TextAlign.center,
+                              "RobotoMono",
+                            )
                           ],
                         ),
                         Icon(
-                          Icons.add,
+                          Icons.add_rounded,
                           color: UtilsColors.pink,
-                          size: CustomSize.height(context, 25),
+                          size: CustomSize.height(context, 27),
                         )
                       ],
                     )),
