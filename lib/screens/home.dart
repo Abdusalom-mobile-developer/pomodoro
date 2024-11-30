@@ -5,6 +5,7 @@ import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/customs/modal_bottom_sheet.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/providers/time_picking.dart';
 import 'package:pomodoro/utils/colors.dart';
@@ -354,7 +355,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius:
                         BorderRadius.circular(CustomSize.height(context, 45))),
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      MyBottomSheet.showCustomBottomSheet(context);
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
