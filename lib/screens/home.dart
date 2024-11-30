@@ -399,7 +399,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       provider.isTimerWorking ? provider.quitTimer() : null;
                     })
                   : CustomTimerSQ("Start", () {
-                      provider.isTimerWorking ? null : provider.startTimer();
+                      provider.isTimerWorking ? null : provider.startTimer(context);
                     }),
               // Quit Button
             ],

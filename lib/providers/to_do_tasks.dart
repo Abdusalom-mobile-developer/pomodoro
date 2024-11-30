@@ -11,29 +11,10 @@ class ToDoTasks extends ChangeNotifier {
         "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
     AllTasksModul("Start new Project",
         "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Clean the Room",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Finish All HW",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Start new Project",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
-    AllTasksModul("Read Book",
-        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
   ];
+
+  void removeTask(int index) {
+    tasks.removeAt(index);
+    notifyListeners();
+  }
 }
