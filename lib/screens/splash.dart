@@ -27,22 +27,20 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Pomodoro Img
-            Transform.translate(
-              offset: Offset(-CustomSize.width(context, 71), 0),
-              child: Image(
-                image: AssetImage(ImgPaths.logo),
-                height: CustomSize.height(context, 2.5),
-                fit: BoxFit.fill,
-              ),
+            Image(
+              image: AssetImage(ImgPaths.logo),
+              height: CustomSize.height(context, 2.3),
+              width: CustomSize.width(context, 0.1),
+              fit: BoxFit.contain,
             ),
 
             // Text 1
             Transform.translate(
-              offset: Offset(0, -CustomSize.height(context, 27)),
+              offset: Offset(0, -CustomSize.height(context, 17)),
               child: CustomText("pomodoro.", UtilsColors.pink, 19,
                   FontWeight.bold, TextAlign.center, "PatuaOne"),
             ),
-            Height(6.1),
+            Height(10.7),
           ],
         ),
       ),
