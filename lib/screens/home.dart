@@ -369,7 +369,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Icon(
                               Icons.list_alt_rounded,
                               color: UtilsColors.pink,
-                              size: CustomSize.height(context, 31),
+                              size: CustomSize.height(context, 33),
                             ),
                             const SizedBox(
                               width: 7,
@@ -385,9 +385,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         Icon(
-                          Icons.add,
+                          Icons.add_rounded,
                           color: UtilsColors.pink,
-                          size: CustomSize.height(context, 25),
+                          size: CustomSize.height(context, 27),
                         )
                       ],
                     )),
