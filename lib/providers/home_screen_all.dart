@@ -7,6 +7,14 @@ class HomeScreenAll extends ChangeNotifier {
   int seconds = 0;
   bool isTimerWorking = false;
 
+  Map<String, dynamic> currentTask = {"task": "", "index": 0};
+
+  void changeCurrentTask(String task, int index) {
+    currentTask["task"] = task;
+    currentTask["index"] = index;
+    notifyListeners();
+  }
+
   void changeCurrentTimerH(int value) {
     if (value == 0) {
       minutes = 25;

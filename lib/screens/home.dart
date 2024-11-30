@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? SizedBox(
                       height: CustomSize.height(context, 19),
                       child: CustomText(
-                          "Read book",
+                          provider.currentTask["task"],
                           UtilsColors.black,
                           CustomSize.height(context, 25),
                           FontWeight.w500,

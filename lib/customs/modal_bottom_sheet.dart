@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro/customs/custom_completed_task_maker.dart';
 import 'package:pomodoro/customs/custom_size.dart';
+import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:provider/provider.dart';
@@ -23,15 +24,23 @@ class MyBottomSheet {
             child: ListView.builder(
               controller: scrollController,
               itemCount: provider.tasks.length,
-              itemBuilder: (context, index) => Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: CustomSize.width(context, 13),
-                ),
-                child: CustomCompletedTaskMaker(
-                  provider.tasks[index].task,
-                  index == provider.tasks.length - 1,
-                  provider.tasks[index].time,
-                  false,
+              itemBuilder: (context, index) => GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  Provider.of<HomeScreenAll>(context, listen: false)
+                      .changeCurrentTask(provider.tasks[index].task, index);
+                  Navigator.pop(context);
+                },
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: CustomSize.width(context, 13),
+                  ),
+                  child: CustomCompletedTaskMaker(
+                    provider.tasks[index].task,
+                    index == provider.tasks.length - 1,
+                    provider.tasks[index].time,
+                    false,
+                  ),
                 ),
               ),
             ),
