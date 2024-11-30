@@ -19,18 +19,27 @@ class HomeScreenAll extends ChangeNotifier {
     notifyListeners();
   }
 
+  void quitTimer() {
+    minutes = 25;
+    seconds = 0;
+    isTimerWorking = false;
+    notifyListeners();
+  }
+
   void startTimer() async {
     isTimerWorking = true;
     notifyListeners();
 
-    while (minutes > 0 || seconds > 0) {
+    while (isTimerWorking && (minutes > 0 || seconds > 0)) {
       if (minutes == 0 && seconds == 0) {
         break;
       }
 
-      await Future.delayed(const Duration(seconds: 1));
+      if (!isTimerWorking) {
+        break;
+      }
+
       seconds--;
-      notifyListeners();
 
       if (seconds <= 0) {
         seconds = 0;
@@ -43,6 +52,9 @@ class HomeScreenAll extends ChangeNotifier {
         seconds = 59;
         notifyListeners();
       }
+
+      notifyListeners();
+      await Future.delayed(const Duration(seconds: 1));
     }
 
     minutes = 25;

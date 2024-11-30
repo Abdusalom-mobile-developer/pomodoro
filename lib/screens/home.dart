@@ -389,12 +389,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Height(30),
               // Start Button
-              CustomTimerSQ("Start", () {
-                provider.isTimerWorking ? null : provider.startTimer();
-              }),
-              // Height(30),
+              provider.isTimerWorking
+                  ? CustomTimerSQ("Quit", () {
+                      provider.isTimerWorking ? provider.quitTimer() : null;
+                    })
+                  : CustomTimerSQ("Start", () {
+                      provider.isTimerWorking ? null : provider.startTimer();
+                    }),
               // Quit Button
-              // CustomTimerSQ("Quit", () {}),
             ],
           ),
         ),
