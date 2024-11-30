@@ -35,14 +35,11 @@ class HomeScreenAll extends ChangeNotifier {
         break;
       }
 
-      await Future.delayed(const Duration(seconds: 1));
-
       if (!isTimerWorking) {
         break;
       }
 
       seconds--;
-      notifyListeners();
 
       if (seconds <= 0) {
         seconds = 0;
@@ -55,6 +52,9 @@ class HomeScreenAll extends ChangeNotifier {
         seconds = 59;
         notifyListeners();
       }
+
+      notifyListeners();
+      await Future.delayed(const Duration(seconds: 1));
     }
 
     minutes = 25;
