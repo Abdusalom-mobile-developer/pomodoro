@@ -15,4 +15,5 @@ class ImgPaths {
   static String navOpt4Chosen = "assets/images/nav_opt4_chosen.png";
   static String splashTomato = "assets/images/splash_tomato.png";
   static String splashTomato2 = "assets/images/splash_tomato2.png";
+  static String logo = "assets/images/logo4.png";
 }
