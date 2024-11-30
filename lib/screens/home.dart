@@ -374,12 +374,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             const SizedBox(
                               width: 7,
                             ),
-                            Text(
+                            CustomText(
                               "Pick a Task",
-                              style: TextStyle(
-                                  color: UtilsColors.pink,
-                                  fontSize: CustomSize.height(context, 45)),
-                            ),
+                              UtilsColors.pink,
+                              CustomSize.height(context, 17),
+                              FontWeight.w500,
+                              TextAlign.center,
+                              "RobotoMono",
+                            )
                           ],
                         ),
                         Icon(
