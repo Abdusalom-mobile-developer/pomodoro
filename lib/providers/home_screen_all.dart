@@ -44,7 +44,8 @@ class HomeScreenAll extends ChangeNotifier {
       if (minutes == 0 && seconds == 0) {
         // ignore: use_build_context_synchronously
         Provider.of<ToDoTasks>(context, listen: false)
-            .removeTask(currentTask["index"]);
+            // ignore: use_build_context_synchronously
+            .removeTask(currentTask["index"], context);
         changeCurrentTimerH(0);
         // ignore: use_build_context_synchronously
         Provider.of<TimePicking>(context, listen: false).changeCurrentTimer(0, context);
@@ -64,7 +65,8 @@ class HomeScreenAll extends ChangeNotifier {
         if (minutes == 0 && seconds == 0) {
           // ignore: use_build_context_synchronously
           Provider.of<ToDoTasks>(context, listen: false)
-              .removeTask(currentTask["index"]);
+              // ignore: use_build_context_synchronously
+              .removeTask(currentTask["index"], context);
           changeCurrentTimerH(0);
            // ignore: use_build_context_synchronously
            Provider.of<TimePicking>(context, listen: false).changeCurrentTimer(0, context);
