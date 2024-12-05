@@ -5,14 +5,26 @@ import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
+import 'package:provider/provider.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({
     super.key,
   });
 
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+     Provider.of<ToDoTasks>(context, listen: false).getTasks();
+  }
   @override
   Widget build(BuildContext context) {
     Timer(

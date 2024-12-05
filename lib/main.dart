@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:pomodoro/moduls/all_tasks_modul.dart';
 import 'package:pomodoro/providers/completed_tasks.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/providers/time_picking.dart';
@@ -13,7 +15,13 @@ import 'package:pomodoro/screens/task_adding_sc.dart';
 import 'package:pomodoro/screens/unfinished_tasks.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+late Box<AllTasksModul> box;
+Future<void> main() async {
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(AllTasksModulAdapter());
+  box = await Hive.openBox<AllTasksModul>('tasksBox');
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   runApp(const MyApp());

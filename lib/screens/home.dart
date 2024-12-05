@@ -346,60 +346,66 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               // Task Picking Part
-              Container(
-                alignment: Alignment.center,
-                width: CustomSize.width(context, 1.5),
-                height: CustomSize.height(context, 13),
-                decoration: BoxDecoration(
-                    color: UtilsColors.pink.withOpacity(0.1),
-                    borderRadius:
-                        BorderRadius.circular(CustomSize.height(context, 45))),
-                child: TextButton(
-                    onPressed: () {
-                      MyBottomSheet.showCustomBottomSheet(context);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Icon(
-                              Icons.list_alt_rounded,
-                              color: UtilsColors.pink,
-                              size: CustomSize.height(context, 33),
-                            ),
-                            const SizedBox(
-                              width: 7,
-                            ),
-                            CustomText(
-                              "Pick a Task",
-                              UtilsColors.pink,
-                              CustomSize.height(context, 17),
-                              FontWeight.w500,
-                              TextAlign.center,
-                              "RobotoMono",
-                            )
-                          ],
-                        ),
-                        Icon(
-                          Icons.add_rounded,
-                          color: UtilsColors.pink,
-                          size: CustomSize.height(context, 27),
-                        )
-                      ],
-                    )),
-              ),
+              provider.isTimerWorking
+                  ? SizedBox(
+                      height: CustomSize.height(context, 13),
+                    )
+                  : Container(
+                      alignment: Alignment.center,
+                      width: CustomSize.width(context, 1.5),
+                      height: CustomSize.height(context, 13),
+                      decoration: BoxDecoration(
+                          color: UtilsColors.pink.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(
+                              CustomSize.height(context, 45))),
+                      child: TextButton(
+                          onPressed: () {
+                            MyBottomSheet.showCustomBottomSheet(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(
+                                    Icons.list_alt_rounded,
+                                    color: UtilsColors.pink,
+                                    size: CustomSize.height(context, 33),
+                                  ),
+                                  const SizedBox(
+                                    width: 7,
+                                  ),
+                                  CustomText(
+                                    "Pick a Task",
+                                    UtilsColors.pink,
+                                    CustomSize.height(context, 17),
+                                    FontWeight.w500,
+                                    TextAlign.center,
+                                    "RobotoMono",
+                                  )
+                                ],
+                              ),
+                              Icon(
+                                Icons.add_rounded,
+                                color: UtilsColors.pink,
+                                size: CustomSize.height(context, 27),
+                              )
+                            ],
+                          )),
+                    ),
               Height(30),
               // Start Button
               provider.isTimerWorking
                   ? CustomTimerSQ("Quit", () {
-                      provider.isTimerWorking ? provider.quitTimer() : null;
+                      provider.isTimerWorking ? provider.quitTimer(context) : null;
                     })
                   : CustomTimerSQ("Start", () {
-                      provider.isTimerWorking ? null : provider.startTimer(context);
+                      provider.isTimerWorking
+                          ? null
+                          : provider.startTimer(context);
                     }),
               // Quit Button
             ],

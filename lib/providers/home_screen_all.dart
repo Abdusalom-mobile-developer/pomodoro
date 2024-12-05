@@ -29,10 +29,11 @@ class HomeScreenAll extends ChangeNotifier {
     notifyListeners();
   }
 
-  void quitTimer() {
+  void quitTimer(BuildContext context) {
     minutes = 25;
     seconds = 0;
     isTimerWorking = false;
+    Provider.of<TimePicking>(context, listen: false).changeCurrentTimer(0, context);
     notifyListeners();
   }
 

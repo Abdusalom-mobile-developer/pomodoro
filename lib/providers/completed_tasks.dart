@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoro/moduls/unfinshed_tasks_md.dart';
+import 'package:pomodoro/moduls/all_tasks_modul.dart';
 
 class CompletedTasks extends ChangeNotifier {
   List<AllTasksModul> tasks = [
