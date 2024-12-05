@@ -16,11 +16,13 @@ import 'package:pomodoro/screens/unfinished_tasks.dart';
 import 'package:provider/provider.dart';
 
 late Box<AllTasksModul> box;
+late Box<AllTasksModul> box2;
 Future<void> main() async {
   await Hive.initFlutter();
 
   Hive.registerAdapter(AllTasksModulAdapter());
   box = await Hive.openBox<AllTasksModul>('tasksBox');
+  box2 = await Hive.openBox<AllTasksModul>('completedTasksBox');
 
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
@@ -103,7 +105,7 @@ final GoRouter _router = GoRouter(initialLocation: "/splash", routes: [
   GoRoute(
     path: "/tasks",
     pageBuilder: (context, state) => CustomTransitionPage(
-      transitionDuration: const Duration(milliseconds: 450),
+      transitionDuration: const Duration(milliseconds: 150),
       key: state.pageKey,
       child: const TasksScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
@@ -116,7 +118,7 @@ final GoRouter _router = GoRouter(initialLocation: "/splash", routes: [
   GoRoute(
     path: "/task_adding",
     pageBuilder: (context, state) => CustomTransitionPage(
-      transitionDuration: const Duration(milliseconds: 450),
+      transitionDuration: const Duration(milliseconds: 100),
       key: state.pageKey,
       child: const TaskAddingSc(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
