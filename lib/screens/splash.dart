@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/providers/completed_tasks.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
@@ -24,6 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
      Provider.of<ToDoTasks>(context, listen: false).getTasks();
+     Provider.of<CompletedTasks>(context, listen: false).getAllCompletedTasks();
   }
   @override
   Widget build(BuildContext context) {
