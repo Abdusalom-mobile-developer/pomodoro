@@ -3,8 +3,11 @@ import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/moduls/all_tasks_modul.dart';
+import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
+import 'package:provider/provider.dart';
 
 class TaskAddingSc extends StatefulWidget {
   const TaskAddingSc({super.key});
@@ -252,7 +255,13 @@ class _TaskAddingScState extends State<TaskAddingSc> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Provider.of<ToDoTasks>(context, listen: false)
+                                      .addNewTask(AllTasksModul(
+                                          controller.text.trim().substring(0, 1).toUpperCase()+controller.text.trim().substring(1),
+                                          "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"));
+                                  context.go("/tasks");
+                                },
                                 child: CustomText(
                                     "Add ",
                                     UtilsColors.bg,

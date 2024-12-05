@@ -400,7 +400,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // Start Button
               provider.isTimerWorking
                   ? CustomTimerSQ("Quit", () {
-                      provider.isTimerWorking ? provider.quitTimer() : null;
+                      provider.isTimerWorking ? provider.quitTimer(context) : null;
                     })
                   : CustomTimerSQ("Start", () {
                       provider.isTimerWorking
