@@ -21,6 +21,8 @@ class TasksScreen extends StatefulWidget {
   State<TasksScreen> createState() => _TasksScreenState();
 }
 
+late BuildContext unfinishedScreenContext;
+
 class _TasksScreenState extends State<TasksScreen> {
   @override
   void initState() {
@@ -42,6 +44,9 @@ class _TasksScreenState extends State<TasksScreen> {
   int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      unfinishedScreenContext = context;
+    });
     return Scaffold(
         backgroundColor: UtilsColors.bg,
         bottomNavigationBar: BottomNavigationBar(
@@ -108,6 +113,7 @@ class _TasksScreenState extends State<TasksScreen> {
             ]),
         // Task Adding Button
         floatingActionButton: CustomButtonAdd("New Task ", () {
+          ScaffoldMessenger.of(context).removeCurrentSnackBar();
           context.go("/task_adding");
         }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

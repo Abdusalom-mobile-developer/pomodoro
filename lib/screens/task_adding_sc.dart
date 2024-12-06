@@ -2,11 +2,13 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
+import 'package:pomodoro/customs/custom_snackbar.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/moduls/all_tasks_modul.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/screens/home.dart';
+import 'package:pomodoro/screens/unfinished_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +21,7 @@ class TaskAddingSc extends StatefulWidget {
 }
 
 class _TaskAddingScState extends State<TaskAddingSc> {
-  
-
-    @override
+  @override
   void initState() {
     super.initState();
     _focusNode.requestFocus();
@@ -215,9 +215,6 @@ class _TaskAddingScState extends State<TaskAddingSc> {
                       child: TextField(
                         focusNode: _focusNode,
                         controller: controller,
-                        onSubmitted: (value) {
-                          controller.clear();
-                        },
                         cursorColor: UtilsColors.black,
                         style: TextStyle(
                             color: UtilsColors.black,
@@ -272,11 +269,19 @@ class _TaskAddingScState extends State<TaskAddingSc> {
                           children: [
                             TextButton(
                                 onPressed: () {
+                                  FocusScope.of(context).unfocus();
+                                  context.go("/tasks");
                                   Provider.of<ToDoTasks>(context, listen: false)
                                       .addNewTask(AllTasksModul(
-                                          controller.text.trim().substring(0, 1).toUpperCase()+controller.text.trim().substring(1),
+                                          controller.text
+                                                  .trim()
+                                                  .substring(0, 1)
+                                                  .toUpperCase() +
+                                              controller.text
+                                                  .trim()
+                                                  .substring(1),
                                           "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"));
-                                  context.go("/tasks");
+                                  showMySnackbar(context, "Task has been added.");
                                 },
                                 child: CustomText(
                                     "Add ",
@@ -285,7 +290,6 @@ class _TaskAddingScState extends State<TaskAddingSc> {
                                     FontWeight.w500,
                                     TextAlign.center,
                                     "Inter")),
-                            
                           ],
                         ),
                       ),

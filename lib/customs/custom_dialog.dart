@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pomodoro/customs/custom_size.dart';
+import 'package:pomodoro/customs/custom_snackbar.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
@@ -92,6 +93,7 @@ void deleteOrCompleteAlertDialog(BuildContext context, int index) {
                   onPressed: () {
                     Provider.of<ToDoTasks>(context, listen: false)
                         .removeTask(index, context);
+                    showMySnackbar(context, "Task has been marked as completed.");
                     Navigator.pop(context);
                   },
                   child: CustomText(
@@ -117,6 +119,7 @@ void deleteOrCompleteAlertDialog(BuildContext context, int index) {
                   onPressed: () {
                     Provider.of<ToDoTasks>(context, listen: false)
                         .justRemove(index);
+                    showMySnackbar(context, "Task has been deleted.");
                     Navigator.pop(context);
                   },
                   child: CustomText(
