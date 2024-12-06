@@ -1,3 +1,4 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
@@ -5,6 +6,7 @@ import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/moduls/all_tasks_modul.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
+import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +19,24 @@ class TaskAddingSc extends StatefulWidget {
 }
 
 class _TaskAddingScState extends State<TaskAddingSc> {
-  @override
+  
+
+    @override
   void initState() {
     super.initState();
     _focusNode.requestFocus();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    BackButtonInterceptor.remove(myInterceptor);
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    showMyDialog(context);
+    return true;
   }
 
   TextEditingController controller = TextEditingController();
@@ -269,9 +285,7 @@ class _TaskAddingScState extends State<TaskAddingSc> {
                                     FontWeight.w500,
                                     TextAlign.center,
                                     "Inter")),
-                            Icon(Icons.add_rounded,
-                                color: UtilsColors.bg,
-                                size: CustomSize.height(context, 31))
+                            
                           ],
                         ),
                       ),

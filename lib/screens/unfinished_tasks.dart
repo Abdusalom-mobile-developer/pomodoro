@@ -1,12 +1,15 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_button_add.dart';
 import 'package:pomodoro/customs/custom_completed_task_maker.dart';
+import 'package:pomodoro/customs/custom_dialog.dart';
 import 'package:pomodoro/customs/custom_scroll_disabler.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
+import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +22,23 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
+  @override
+  void initState() {
+    super.initState();
+    BackButtonInterceptor.add(myInterceptor);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    BackButtonInterceptor.remove(myInterceptor);
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    showMyDialog(context);
+    return true;
+  }
+
   int _currentIndex = 1;
   @override
   Widget build(BuildContext context) {
@@ -295,11 +315,17 @@ class _TasksScreenState extends State<TasksScreen> {
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        return CustomCompletedTaskMaker(
-                            provider.tasks[index].task,
-                            index == provider.tasks.length - 1,
-                            provider.tasks[index].time,
-                            false);
+                        return GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            deleteOrCompleteAlertDialog(context, index);
+                          },
+                          child: CustomCompletedTaskMaker(
+                              provider.tasks[index].task,
+                              index == provider.tasks.length - 1,
+                              provider.tasks[index].time,
+                              false),
+                        );
                       },
                       childCount: provider.tasks.length,
                     ),

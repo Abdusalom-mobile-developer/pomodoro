@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoro/customs/custom_completed_task_maker.dart';
 import 'package:pomodoro/customs/custom_size.dart';
+import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
@@ -21,29 +22,40 @@ class MyBottomSheet {
           builder: (context, provider, child) => Padding(
             padding:
                 EdgeInsets.symmetric(vertical: CustomSize.height(context, 20)),
-            child: ListView.builder(
-              controller: scrollController,
-              itemCount: provider.tasks.length,
-              itemBuilder: (context, index) => GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  Provider.of<HomeScreenAll>(context, listen: false)
-                      .changeCurrentTask(provider.tasks[index].task, index);
-                  Navigator.pop(context);
-                },
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: CustomSize.width(context, 13),
+            child: provider.tasks.isEmpty
+                ? Center(
+                    child: CustomText(
+                        "No tasks found.",
+                        UtilsColors.black,
+                        CustomSize.height(context, 17),
+                        FontWeight.w500,
+                        TextAlign.center,
+                        "RobotoMono"),
+                  )
+                : ListView.builder(
+                    controller: scrollController,
+                    itemCount: provider.tasks.length,
+                    itemBuilder: (context, index) => GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        Provider.of<HomeScreenAll>(context, listen: false)
+                            .changeCurrentTask(
+                                provider.tasks[index].task, index);
+                        Navigator.pop(context);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: CustomSize.width(context, 13),
+                        ),
+                        child: CustomCompletedTaskMaker(
+                          provider.tasks[index].task,
+                          index == provider.tasks.length - 1,
+                          provider.tasks[index].time,
+                          false,
+                        ),
+                      ),
+                    ),
                   ),
-                  child: CustomCompletedTaskMaker(
-                    provider.tasks[index].task,
-                    index == provider.tasks.length - 1,
-                    provider.tasks[index].time,
-                    false,
-                  ),
-                ),
-              ),
-            ),
           ),
         ),
       ),
