@@ -8,7 +8,6 @@ import 'package:pomodoro/customs/height.dart';
 import 'package:pomodoro/moduls/all_tasks_modul.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/screens/home.dart';
-import 'package:pomodoro/screens/unfinished_tasks.dart';
 import 'package:pomodoro/utils/colors.dart';
 import 'package:pomodoro/utils/img_paths.dart';
 import 'package:provider/provider.dart';
