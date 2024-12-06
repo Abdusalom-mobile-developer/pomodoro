@@ -105,7 +105,7 @@ final GoRouter _router = GoRouter(initialLocation: "/splash", routes: [
   GoRoute(
     path: "/tasks",
     pageBuilder: (context, state) => CustomTransitionPage(
-      transitionDuration: const Duration(milliseconds: 150),
+      transitionDuration: const Duration(milliseconds: 250),
       key: state.pageKey,
       child: const TasksScreen(),
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
