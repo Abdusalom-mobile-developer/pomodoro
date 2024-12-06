@@ -33,4 +33,17 @@ class ToDoTasks extends ChangeNotifier {
     tasks.removeAt(index);
     notifyListeners();
   }
+
+  void justRemove(int index) async {
+    for (var entry in box.toMap().entries) {
+      var key = entry.key;
+      var value = entry.value;
+
+      if (value.task == tasks[index].task) {
+        await box.delete(key);
+      }
+    }
+    tasks.removeAt(index);
+    notifyListeners();
+  }
 }
