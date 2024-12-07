@@ -21,29 +21,35 @@ class CustomCompletedTaskMaker extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    content,
-                    style: TextStyle(
-                        color: UtilsColors.black.withOpacity(0.5),
-                        fontSize: CustomSize.height(context, 47),
-                        fontFamily: "Inter",
-                        decoration: isCompleted
-                            ? TextDecoration.lineThrough
-                            : TextDecoration.none,
-                        decorationColor: UtilsColors.black.withOpacity(0.5)),
-                  ),
-                  Text(
-                    time,
-                    style: TextStyle(
-                      color: UtilsColors.black.withOpacity(0.5),
-                      fontSize: CustomSize.height(context, 57),
-                      fontFamily: "Inter",
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      content,
+                      style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          color: UtilsColors.black.withOpacity(0.5),
+                          fontSize: CustomSize.height(context, 47),
+                          fontFamily: "Inter",
+                          decoration: isCompleted
+                              ? TextDecoration.lineThrough
+                              : TextDecoration.none,
+                          decorationColor: UtilsColors.black.withOpacity(0.5)),
                     ),
-                  ),
-                ],
+                    Text(
+                      time,
+                      style: TextStyle(
+                        color: UtilsColors.black.withOpacity(0.5),
+                        fontSize: CustomSize.height(context, 57),
+                        fontFamily: "Inter",
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: CustomSize.width(context, 17),
               ),
               Icon(
                 isCompleted ? Icons.check_circle : Icons.circle_outlined,
