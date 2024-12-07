@@ -14,7 +14,7 @@ class HomeScreenAll extends ChangeNotifier {
 
   Map<String, dynamic> currentTask = {"task": null, "index": 0};
 
-  void changeCurrentTask(String task, int index) {
+  void changeCurrentTask(String? task, int? index) {
     currentTask["task"] = task;
     currentTask["index"] = index;
     notifyListeners();

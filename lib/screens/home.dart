@@ -250,13 +250,13 @@ class _HomeScreenState extends State<HomeScreen> {
               provider.isTimerWorking && provider.isPomodoro
                   ? SizedBox(
                       height: CustomSize.height(context, 19),
-                      child: CustomText(
+                      width: CustomSize.width(context, 1.3),
+                      child: Text(
+                        textAlign:  TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
                           provider.currentTask["task"],
-                          UtilsColors.black,
-                          CustomSize.height(context, 25),
-                          FontWeight.w500,
-                          TextAlign.center,
-                          "RobotoMono"),
+                         style: TextStyle(color:  UtilsColors.black, fontSize: CustomSize.height(context, 25), fontWeight: FontWeight.w500, fontFamily: "RobotoMono"),
+                         ),
                     )
                   : !provider.isTimerWorking
                       ? Consumer<TimePicking>(
@@ -269,13 +269,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: timePicker.buttons),
                           ),
                         )
-                      : SizedBox(height: CustomSize.height(context, 19), child: CustomText(
-                          "Break",
-                          UtilsColors.black,
-                          CustomSize.height(context, 25),
-                          FontWeight.w500,
-                          TextAlign.center,
-                          "RobotoMono"),),
+                      : SizedBox(
+                          height: CustomSize.height(context, 19),
+                          child: CustomText(
+                              "Break",
+                              UtilsColors.black,
+                              CustomSize.height(context, 25),
+                              FontWeight.w500,
+                              TextAlign.center,
+                              "RobotoMono"),
+                        ),
               // Time Showing Tomato Part
               Container(
                 alignment: Alignment.center,

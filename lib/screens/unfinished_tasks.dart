@@ -8,6 +8,7 @@ import 'package:pomodoro/customs/custom_scroll_disabler.dart';
 import 'package:pomodoro/customs/custom_size.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/height.dart';
+import 'package:pomodoro/providers/home_screen_all.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
 import 'package:pomodoro/screens/home.dart';
 import 'package:pomodoro/utils/colors.dart';
@@ -325,6 +326,8 @@ class _TasksScreenState extends State<TasksScreen> {
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
                             deleteOrCompleteAlertDialog(context, index);
+                            Provider.of<HomeScreenAll>(context, listen: false)
+                                .changeCurrentTask(null, null);
                           },
                           child: CustomCompletedTaskMaker(
                               provider.tasks[index].task,
