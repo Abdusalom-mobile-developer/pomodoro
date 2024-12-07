@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pomodoro/customs/custom_size.dart';
+import 'package:pomodoro/customs/custom_snackbar.dart';
 import 'package:pomodoro/customs/custom_text.dart';
 import 'package:pomodoro/customs/custom_timer_s_q.dart';
 import 'package:pomodoro/customs/height.dart';
@@ -246,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Height(25),
               // Time Choosing Part
-              provider.isTimerWorking
+              provider.isTimerWorking && provider.isPomodoro
                   ? SizedBox(
                       height: CustomSize.height(context, 19),
                       child: CustomText(
@@ -257,15 +258,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           TextAlign.center,
                           "RobotoMono"),
                     )
-                  : Consumer<TimePicking>(
-                      builder: (context, timePicker, child) => Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: CustomSize.width(context, 29)),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: timePicker.buttons),
-                      ),
-                    ),
+                  : !provider.isTimerWorking
+                      ? Consumer<TimePicking>(
+                          builder: (context, timePicker, child) => Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: CustomSize.width(context, 29)),
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: timePicker.buttons),
+                          ),
+                        )
+                      : SizedBox(height: CustomSize.height(context, 19), child: CustomText(
+                          "Break",
+                          UtilsColors.black,
+                          CustomSize.height(context, 25),
+                          FontWeight.w500,
+                          TextAlign.center,
+                          "RobotoMono"),),
               // Time Showing Tomato Part
               Container(
                 alignment: Alignment.center,
@@ -350,62 +360,78 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? SizedBox(
                       height: CustomSize.height(context, 13),
                     )
-                  : Container(
-                      alignment: Alignment.center,
-                      width: CustomSize.width(context, 1.5),
-                      height: CustomSize.height(context, 13),
-                      decoration: BoxDecoration(
-                          color: UtilsColors.pink.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                              CustomSize.height(context, 45))),
-                      child: TextButton(
-                          onPressed: () {
-                            MyBottomSheet.showCustomBottomSheet(context);
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                  : provider.isPomodoro
+                      ? Container(
+                          alignment: Alignment.center,
+                          width: CustomSize.width(context, 1.5),
+                          height: CustomSize.height(context, 13),
+                          decoration: BoxDecoration(
+                              color: UtilsColors.pink.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(
+                                  CustomSize.height(context, 45))),
+                          child: TextButton(
+                              onPressed: () {
+                                MyBottomSheet.showCustomBottomSheet(context);
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const SizedBox(
-                                    width: 5,
+                                  Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Icon(
+                                        Icons.list_alt_rounded,
+                                        color: UtilsColors.pink,
+                                        size: CustomSize.height(context, 33),
+                                      ),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      CustomText(
+                                        "Pick a Task",
+                                        UtilsColors.pink,
+                                        CustomSize.height(context, 17),
+                                        FontWeight.w500,
+                                        TextAlign.center,
+                                        "RobotoMono",
+                                      )
+                                    ],
                                   ),
                                   Icon(
-                                    Icons.list_alt_rounded,
+                                    Icons.add_rounded,
                                     color: UtilsColors.pink,
-                                    size: CustomSize.height(context, 33),
-                                  ),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  CustomText(
-                                    "Pick a Task",
-                                    UtilsColors.pink,
-                                    CustomSize.height(context, 17),
-                                    FontWeight.w500,
-                                    TextAlign.center,
-                                    "RobotoMono",
+                                    size: CustomSize.height(context, 27),
                                   )
                                 ],
-                              ),
-                              Icon(
-                                Icons.add_rounded,
-                                color: UtilsColors.pink,
-                                size: CustomSize.height(context, 27),
-                              )
-                            ],
-                          )),
-                    ),
+                              )),
+                        )
+                      : SizedBox(
+                          height: CustomSize.height(context, 13),
+                        ),
               Height(30),
               // Start Button
               provider.isTimerWorking
                   ? CustomTimerSQ("Quit", () {
-                      provider.isTimerWorking ? provider.quitTimer(context) : null;
+                      provider.isTimerWorking
+                          ? provider.quitTimer(context)
+                          : null;
                     })
                   : CustomTimerSQ("Start", () {
-                      provider.isTimerWorking
-                          ? null
-                          : provider.startTimer(context);
+                      if (provider.isPomodoro) {
+                        provider.currentTask["task"] == null
+                            ? showMySnackbar(
+                                context, "Choose Task to start Pomodoro!")
+                            : provider.isTimerWorking
+                                ? null
+                                : provider.startTimer(context);
+                      } else {
+                        provider.isTimerWorking
+                            ? null
+                            : provider.startTimer(context);
+                      }
                     }),
               // Quit Button
             ],
