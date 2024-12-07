@@ -30,7 +30,6 @@ class TimePicking extends ChangeNotifier {
 
   void changeCurrentTimer(int value, BuildContext context) {
     currentTimer = value;
-
     buttons.clear();
 
     for (int i = 0; i < 3; i++) {
