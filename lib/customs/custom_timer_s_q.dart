@@ -14,13 +14,19 @@ class CustomTimerSQ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: CustomSize.width(context, 4)),
       alignment: Alignment.center,
-      width: CustomSize.width(context, 1.9),
-      height: CustomSize.height(context, 13.5),
+      // width: CustomSize.width(context, 1.9),
+      // height: CustomSize.height(context, 13.5),
       decoration: BoxDecoration(
           color: UtilsColors.pink,
           borderRadius: BorderRadius.circular(CustomSize.height(context, 45))),
       child: TextButton(
+          style: ButtonStyle(
+            fixedSize: WidgetStatePropertyAll(Size(
+                CustomSize.width(context, 1.9),
+                CustomSize.height(context, 13.5))),
+          ),
           onPressed: function,
           child: Text(
             text,

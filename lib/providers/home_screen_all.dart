@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:pomodoro/customs/custom_snackbar.dart';
 import 'package:pomodoro/providers/time_picking.dart';
 import 'package:pomodoro/providers/to_do_tasks.dart';
+import 'package:pomodoro/services/local_notification.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreenAll extends ChangeNotifier {
@@ -57,11 +58,12 @@ class HomeScreenAll extends ChangeNotifier {
               .removeTask(currentTask["index"], context);
           currentTask["task"] = null;
           currentTask["index"] = 0;
-          showMySnackbar(context, "Task has been completed. ✔️");
+          showMySnackbar(context, "Task has been completed.");
         }
         Provider.of<TimePicking>(context, listen: false)
             .changeCurrentTimer(0, context);
         changeCurrentTimerH(0);
+        LocalNotification.showNotification("Time’s Up!");
         notifyListeners();
         break;
       }
@@ -88,6 +90,7 @@ class HomeScreenAll extends ChangeNotifier {
           Provider.of<TimePicking>(context, listen: false)
               .changeCurrentTimer(0, context);
           changeCurrentTimerH(0);
+          LocalNotification.showNotification("Time’s Up!");
           notifyListeners();
           break;
         }
@@ -95,6 +98,7 @@ class HomeScreenAll extends ChangeNotifier {
         seconds = 59;
         notifyListeners();
       }
+
 
       notifyListeners();
       await Future.delayed(const Duration(seconds: 1));
