@@ -24,9 +24,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-     Provider.of<ToDoTasks>(context, listen: false).getTasks();
-     Provider.of<CompletedTasks>(context, listen: false).getAllCompletedTasks();
+    Provider.of<ToDoTasks>(context, listen: false).getTasks();
+    Provider.of<CompletedTasks>(context, listen: false).getAllCompletedTasks();
   }
+
   @override
   Widget build(BuildContext context) {
     Timer(

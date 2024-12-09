@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -13,11 +14,29 @@ import 'package:pomodoro/screens/instruction.dart';
 import 'package:pomodoro/screens/splash.dart';
 import 'package:pomodoro/screens/task_adding_sc.dart';
 import 'package:pomodoro/screens/unfinished_tasks.dart';
+import 'package:pomodoro/services/local_notification.dart';
 import 'package:provider/provider.dart';
 
 late Box<AllTasksModul> box;
 late Box<AllTasksModul> box2;
+
 Future<void> main() async {
+  AwesomeNotifications().initialize(
+    'resource://drawable/tomato', 
+    [
+      NotificationChannel(
+        channelKey: 'basic_channel',
+        channelName: 'Basic notifications',
+        channelDescription: 'Notification channel for basic notifications',
+        defaultColor: const Color(0xFF9D50DD),
+        ledColor: Colors.white,
+        importance: NotificationImportance.High,
+      ),
+    ],
+  );
+
+  LocalNotification.requestNotificationPermission();
+
   await Hive.initFlutter();
 
   Hive.registerAdapter(AllTasksModulAdapter());

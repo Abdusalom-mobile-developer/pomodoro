@@ -252,11 +252,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: CustomSize.height(context, 19),
                       width: CustomSize.width(context, 1.3),
                       child: Text(
-                        textAlign:  TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                          provider.currentTask["task"],
-                         style: TextStyle(color:  UtilsColors.black, fontSize: CustomSize.height(context, 25), fontWeight: FontWeight.w500, fontFamily: "RobotoMono"),
-                         ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        provider.currentTask["task"],
+                        style: TextStyle(
+                            color: UtilsColors.black,
+                            fontSize: CustomSize.height(context, 25),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "RobotoMono"),
+                      ),
                     )
                   : !provider.isTimerWorking
                       ? Consumer<TimePicking>(
