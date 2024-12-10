@@ -19,7 +19,7 @@ class CustomTimerButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: CustomSize.height(context, 19),
+      height: CustomSize.height(context, 19.3),
       padding: EdgeInsets.symmetric(horizontal: CustomSize.width(context, 100)),
       decoration: BoxDecoration(
           border: Border.all(
@@ -35,7 +35,7 @@ class CustomTimerButtons extends StatelessWidget {
         child: CustomText(
             content,
             isPressed ? UtilsColors.bg : UtilsColors.black,
-            CustomSize.width(context, 6.3),
+            CustomSize.width(context, 6.1),
             FontWeight.w600,
             TextAlign.center,
             "RobotoMono"),
