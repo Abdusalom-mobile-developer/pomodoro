@@ -17,7 +17,7 @@ import 'package:pomodoro/screens/unfinished_tasks.dart';
 import 'package:pomodoro/services/local_notification.dart';
 import 'package:provider/provider.dart';
 
-late Box<AllTasksModul> box;
+late Box<AllTasksModul> box; 
 late Box<AllTasksModul> box2;
 
 Future<void> main() async {

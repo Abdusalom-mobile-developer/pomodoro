@@ -31,9 +31,12 @@ class _InstructionScreenState extends State<InstructionScreen> {
   }
 
   bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
     showMyDialog(context);
-    return true;
-  }
+  });
+  return true;
+}
+
   int _currentIndex = 3;
   @override
   Widget build(BuildContext context) {

@@ -99,7 +99,6 @@ class HomeScreenAll extends ChangeNotifier {
         notifyListeners();
       }
 
-
       notifyListeners();
       await Future.delayed(const Duration(seconds: 1));
     }
