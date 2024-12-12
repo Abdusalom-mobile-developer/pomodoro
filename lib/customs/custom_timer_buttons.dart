@@ -20,6 +20,7 @@ class CustomTimerButtons extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       height: CustomSize.height(context, 19.3),
+      width: CustomSize.width(context, 4),
       padding: EdgeInsets.symmetric(horizontal: CustomSize.width(context, 100)),
       decoration: BoxDecoration(
           border: Border.all(
@@ -38,7 +39,7 @@ class CustomTimerButtons extends StatelessWidget {
             CustomSize.width(context, 6.1),
             FontWeight.w600,
             TextAlign.center,
-            "RobotoMono"),
+            "Inter"),
       ),
     );
   }

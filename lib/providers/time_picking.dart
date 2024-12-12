@@ -8,24 +8,24 @@ class TimePicking extends ChangeNotifier {
   List<Widget> buttons = [
     CustomTimerButtons(
       true,
-      "Pomodoro",
+      "25 mins",
       0,
     ),
     CustomTimerButtons(
       false,
-      "Short Break",
+      "5 mins",
       1,
     ),
     CustomTimerButtons(
       false,
-      "Long Break",
+      "15 mins",
       2,
     )
   ];
   List<String> contents = [
-    "Pomodoro",
-    "Short Break",
-    "Long Break",
+    "25 mins",
+    "5 mins",
+    "15 mins",
   ];
 
   void changeCurrentTimer(int value, BuildContext context) {

@@ -25,16 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    BackButtonInterceptor.add(myInterceptor);
+    BackButtonInterceptor.add(myInterceptorr);
   }
 
   @override
   void dispose() {
     super.dispose();
-    BackButtonInterceptor.remove(myInterceptor);
+    BackButtonInterceptor.remove(myInterceptorr);
   }
 
-  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+  bool myInterceptorr(bool stopDefaultButtonEvent, RouteInfo info) {
     showMyDialog(context);
     return true;
   }
@@ -264,14 +264,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   : !provider.isTimerWorking
                       ? Consumer<TimePicking>(
-                          builder: (context, timePicker, child) => Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: CustomSize.width(context, 29)),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: timePicker.buttons),
-                          ),
+                          builder: (context, timePicker, child) => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: timePicker.buttons),
                         )
                       : SizedBox(
                           height: CustomSize.height(context, 19),
@@ -295,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image(
                         image: AssetImage(ImgPaths.bigTomato),
                         fit: BoxFit.fill,
-                        width: CustomSize.width(context, 1.1),
+                        height: CustomSize.height(context, 2.3),
                       ),
                     ),
                     Container(
