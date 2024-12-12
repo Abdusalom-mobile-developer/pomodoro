@@ -290,7 +290,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Image(
                         image: AssetImage(ImgPaths.bigTomato),
                         fit: BoxFit.fill,
-                        width: CustomSize.width(context, 1.1),
+                        height: CustomSize.height(context, 2.3),
                       ),
                     ),
                     Container(
